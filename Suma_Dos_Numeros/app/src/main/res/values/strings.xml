@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Suma_Dos_Numeros</string>
+    <string name="n1">Numero 1</string>
+    <string name="n2">Numero 2</string>
+</resources>

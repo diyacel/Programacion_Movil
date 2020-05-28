@@ -1,0 +1,2 @@
+rootProject.name='Suma_Dos_Numeros'
+include ':app'
