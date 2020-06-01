@@ -34,7 +34,7 @@
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -55,13 +55,14 @@
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <Button
         android:id="@+id/btnSumar"
+        android:onClick="calcular"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="340dp"
@@ -73,6 +74,7 @@
 
     <Button
         android:id="@+id/btnRestar"
+        android:onClick="calcular"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:text="-"
@@ -83,6 +85,7 @@
 
     <Button
         android:id="@+id/btnMultiplicar"
+        android:onClick="calcular"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:text="*"
@@ -93,6 +96,7 @@
 
     <Button
         android:id="@+id/btnDividir"
+        android:onClick="calcular"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:text="/"
@@ -104,8 +108,8 @@
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="66dp"
-        android:layout_height="14dp"
+        android:layout_width="72dp"
+        android:layout_height="20dp"
         android:layout_marginTop="240dp"
         android:text="Resultado"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,10 +121,12 @@
         android:id="@+id/txtResultado"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:ems="10"
         android:enabled="false"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
