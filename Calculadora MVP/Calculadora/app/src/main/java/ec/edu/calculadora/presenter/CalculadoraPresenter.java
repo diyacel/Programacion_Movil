@@ -3,9 +3,7 @@ package ec.edu.calculadora.presenter;
 import ec.edu.calculadora.interfaces.Calculadora;
 import ec.edu.calculadora.model.CalculadoraModel;
 
-/**
- * Created by albertopalomarrobledo on 7/7/17.
- */
+
 
 public class CalculadoraPresenter implements Calculadora.Presenter{
 

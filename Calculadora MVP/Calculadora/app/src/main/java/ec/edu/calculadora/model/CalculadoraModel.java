@@ -15,6 +15,8 @@ public class CalculadoraModel implements Calculadora.Model {
     private CalculadoraDTO calculadoraDTO;
     private Calculadora.Presenter presenter;
     private Boolean notClickIgual;
+    double result = Math.exp(2);
+
 
     public CalculadoraModel(Calculadora.Presenter presenter){
         this.presenter=presenter;
@@ -51,6 +53,9 @@ public class CalculadoraModel implements Calculadora.Model {
                 calculadoraDTO.setOperacion("/");
                 Log.d("dividir","/");
                 break;
+            case R.id.btnExponencial:
+                calculadoraDTO.setOperacion("^");
+                Log.d("exponencial","^");
         }
 
         if(calculadoraDTO.getResultado()==null){
@@ -120,6 +125,11 @@ public class CalculadoraModel implements Calculadora.Model {
                 calculadoraDTO.setResultado(calculadoraDTO.getResultado() / calculadoraDTO.getNumero());
                 Log.d("resultado dividir",calculadoraDTO.getResultado().toString());
                 break;
+            case "^":
+                calculadoraDTO.setResultado(Math.pow(calculadoraDTO.getResultado(),calculadoraDTO.getNumero()));
+                Log.d("resultado exponencial",calculadoraDTO.getResultado().toString());
+                break;
+
         }
         presenter.showResult(calculadoraDTO.getResultado().toString());
         calculadoraDTO.setOperacion("=");
