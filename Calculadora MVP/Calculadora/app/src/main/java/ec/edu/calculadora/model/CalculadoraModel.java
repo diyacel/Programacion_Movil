@@ -56,6 +56,11 @@ public class CalculadoraModel implements Calculadora.Model {
             case R.id.btnExponencial:
                 calculadoraDTO.setOperacion("^");
                 Log.d("exponencial","^");
+                break;
+            case R.id.btnFactorial:
+                calculadoraDTO.setOperacion("!");
+                Log.d("factorial","!");
+                break;
         }
 
         if(calculadoraDTO.getResultado()==null){
@@ -106,7 +111,12 @@ public class CalculadoraModel implements Calculadora.Model {
         presenter.showOperations("");
         presenter.showResult("");
     }
-
+    public double factorial (double numero) {
+        if (numero==0)
+            return 1;
+        else
+            return numero * factorial(numero-1);
+    }
     private void calcular(){
         switch (this.calculadoraDTO.getOperacion()){
             case "+":
@@ -128,6 +138,10 @@ public class CalculadoraModel implements Calculadora.Model {
             case "^":
                 calculadoraDTO.setResultado(Math.pow(calculadoraDTO.getResultado(),calculadoraDTO.getNumero()));
                 Log.d("resultado exponencial",calculadoraDTO.getResultado().toString());
+                break;
+            case "!":
+                calculadoraDTO.setResultado(factorial(calculadoraDTO.getNumero()));
+                Log.d("resultado Factorial",calculadoraDTO.getResultado().toString());
                 break;
 
         }
