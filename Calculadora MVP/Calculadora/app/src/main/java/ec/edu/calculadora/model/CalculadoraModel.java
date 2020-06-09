@@ -61,6 +61,10 @@ public class CalculadoraModel implements Calculadora.Model {
                 calculadoraDTO.setOperacion("!");
                 Log.d("factorial","!");
                 break;
+            case R.id.btnMod:
+                calculadoraDTO.setOperacion("%");
+                Log.d("factorial","%");
+                break;
         }
 
         if(calculadoraDTO.getResultado()==null){
@@ -140,6 +144,10 @@ public class CalculadoraModel implements Calculadora.Model {
                 Log.d("resultado exponencial",calculadoraDTO.getResultado().toString());
                 break;
             case "!":
+                calculadoraDTO.setResultado(factorial(calculadoraDTO.getNumero()));
+                Log.d("resultado Factorial",calculadoraDTO.getResultado().toString());
+                break;
+            case "%":
                 calculadoraDTO.setResultado(factorial(calculadoraDTO.getNumero()));
                 Log.d("resultado Factorial",calculadoraDTO.getResultado().toString());
                 break;
