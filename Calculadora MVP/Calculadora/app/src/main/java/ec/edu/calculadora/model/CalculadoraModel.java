@@ -7,7 +7,8 @@ import ec.edu.calculadora.R;
 import ec.edu.calculadora.interfaces.Calculadora;
 
 /**
- * Created by albertopalomarrobledo on 7/7/17.
+ * @author Enso Vera
+ * @author Diego Yacelga
  */
 
 public class CalculadoraModel implements Calculadora.Model {
@@ -15,24 +16,24 @@ public class CalculadoraModel implements Calculadora.Model {
     private CalculadoraDTO calculadoraDTO;
     private Calculadora.Presenter presenter;
     private Boolean notClickIgual;
-    double result = Math.exp(2);
-
 
     public CalculadoraModel(Calculadora.Presenter presenter){
         this.presenter=presenter;
         this.calculadoraDTO = new CalculadoraDTO();
         this.notClickIgual = true;
+        this.calculadoraDTO=new CalculadoraDTO() ;
     }
 
     @Override
     public void calculadora(String data) {
         calculadoraDTO.setNumero(Double.parseDouble(data));
         calcular();
-        //calculadoraDTO.setOperacion("");
         notClickIgual = false;
-        //resultado= Double.valueOf(data)* Double.valueOf(data);
     }
-
+    /**
+     * @param view la vista con la que se va a interactuar
+     * @param data Un dato tipo string con el que se identifica el tipo de operacion
+     */
     @Override
     public void operacion(android.view.View view, String data) {
 
@@ -63,7 +64,7 @@ public class CalculadoraModel implements Calculadora.Model {
                 break;
             case R.id.btnMod:
                 calculadoraDTO.setOperacion("%");
-                Log.d("factorial","%");
+                Log.d("modulo","%");
                 break;
         }
 
@@ -115,43 +116,40 @@ public class CalculadoraModel implements Calculadora.Model {
         presenter.showOperations("");
         presenter.showResult("");
     }
-    public double factorial (double numero) {
-        if (numero==0)
-            return 1;
-        else
-            return numero * factorial(numero-1);
-    }
+
     private void calcular(){
         switch (this.calculadoraDTO.getOperacion()){
             case "+":
-                calculadoraDTO.setResultado(calculadoraDTO.getResultado() + calculadoraDTO.getNumero());
+                calculadoraDTO.setResultado(calculadoraDTO.sumar(calculadoraDTO.getResultado(),calculadoraDTO.getNumero()));
                 Log.d("resultado suma",calculadoraDTO.getResultado().toString());
                 break;
             case "-":
-                calculadoraDTO.setResultado(calculadoraDTO.getResultado() - calculadoraDTO.getNumero());
+                calculadoraDTO.setResultado(calculadoraDTO.restar(calculadoraDTO.getResultado(),calculadoraDTO.getNumero()));
                 Log.d("resultado resta",calculadoraDTO.getResultado().toString());
                 break;
             case "*":
-                calculadoraDTO.setResultado(calculadoraDTO.getResultado() * calculadoraDTO.getNumero());
+                calculadoraDTO.setResultado(calculadoraDTO.multiplicar(calculadoraDTO.getResultado(),calculadoraDTO.getNumero()));
                 Log.d("resultado multiplicar",calculadoraDTO.getResultado().toString());
                 break;
             case "/":
-                calculadoraDTO.setResultado(calculadoraDTO.getResultado() / calculadoraDTO.getNumero());
+                calculadoraDTO.setResultado(calculadoraDTO.dividir(calculadoraDTO.getResultado(),calculadoraDTO.getNumero()));
                 Log.d("resultado dividir",calculadoraDTO.getResultado().toString());
                 break;
             case "^":
-                calculadoraDTO.setResultado(Math.pow(calculadoraDTO.getResultado(),calculadoraDTO.getNumero()));
+                calculadoraDTO.setResultado(calculadoraDTO.exponenciar(calculadoraDTO.getResultado(),calculadoraDTO.getNumero()));
                 Log.d("resultado exponencial",calculadoraDTO.getResultado().toString());
                 break;
             case "!":
-                calculadoraDTO.setResultado(factorial(calculadoraDTO.getNumero()));
+                calculadoraDTO.setResultado(calculadoraDTO.factorial(calculadoraDTO.getNumero()));
                 Log.d("resultado Factorial",calculadoraDTO.getResultado().toString());
                 break;
             case "%":
-                calculadoraDTO.setResultado(factorial(calculadoraDTO.getNumero()));
-                Log.d("resultado Factorial",calculadoraDTO.getResultado().toString());
+                //calculadoraDTO.setResultado(calculadoraDTO.factorial(calculadoraDTO.getNumero()));
+                //Log.d("resultado Factorial",calculadoraDTO.getResultado().toString());
                 break;
 
+            default:
+                throw new IllegalStateException("Unexpected value: " + this.calculadoraDTO.getOperacion());
         }
         presenter.showResult(calculadoraDTO.getResultado().toString());
         calculadoraDTO.setOperacion("=");
