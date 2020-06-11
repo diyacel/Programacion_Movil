@@ -66,6 +66,10 @@ public class CalculadoraModel implements Calculadora.Model {
                 calculadoraDTO.setOperacion("%");
                 Log.d("modulo","%");
                 break;
+            case R.id.btnSeno:
+                calculadoraDTO.setOperacion("sen");
+                Log.d("modulo","sen");
+                break;
         }
 
         if(calculadoraDTO.getResultado()==null){
@@ -146,6 +150,10 @@ public class CalculadoraModel implements Calculadora.Model {
             case "%":
                 //calculadoraDTO.setResultado(calculadoraDTO.factorial(calculadoraDTO.getNumero()));
                 //Log.d("resultado Factorial",calculadoraDTO.getResultado().toString());
+                break;
+            case "sen":
+                calculadoraDTO.setResultado(calculadoraDTO.seno(calculadoraDTO.getNumero()));
+                Log.d("seno",calculadoraDTO.getResultado().toString());
                 break;
 
             default:

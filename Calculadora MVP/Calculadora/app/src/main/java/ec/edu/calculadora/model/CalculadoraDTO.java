@@ -71,6 +71,34 @@ public class CalculadoraDTO {
         else
             return numero * factorial(numero-1);
     }
+
+    public double seno (double numero) {
+        double angulo = Math.toRadians(numero);
+
+        double sumando, sumatoria = 0, precision = 0.0001d;
+
+        // limite superior, iteracion de la sumatoria
+        int n = 0;
+
+        do {
+            sumando = Math.pow(-1, n) / factorial2(2 * n) * Math.pow(angulo, 2 * n);
+            sumatoria = sumatoria + sumando;
+            n = n + 1;
+        } while (Math.abs(sumando) > precision);
+
+        return sumatoria;
+    }
+
+    static double factorial2(int numero) {
+        double factorial = 1.0d;
+
+        while (numero != 0) {
+            factorial *= numero--;
+        }
+
+        return factorial;
+    }
+
     @Override
     public String toString() {
         return "CalculadoraDTO{" +
