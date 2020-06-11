@@ -1,5 +1,10 @@
 package ec.edu.calculadora.model;
 
+import android.util.Log;
+
+import java.util.HashMap;
+import java.util.List;
+
 public class CalculadoraDTO {
     private Double resultado;
     private Double numero;
@@ -98,6 +103,46 @@ public class CalculadoraDTO {
 
         return factorial;
     }
+
+    public static double findSquareRoot(double number)
+    {
+        boolean isPositiveNumber = true;
+        double g1;
+        if(number==0)
+        {
+            Log.d("raiz","Square root of "+number+" = "+0);
+            return 0;
+        }
+
+        //If the number given is a -ve number
+        else if(number<0)
+        {
+            number=-number;
+            isPositiveNumber = false;
+        }
+
+        //Proceeding to find out square root of the number
+        double squareRoot = number/2;
+        do
+        {
+            g1=squareRoot;
+            squareRoot = (g1 + (number/g1))/2;
+        }
+        while((g1-squareRoot)!=0);
+
+        //Displays square root in the case of a positive number
+        if(isPositiveNumber)
+        {
+            return squareRoot;
+        }
+        //Displays square root in the case of a -ve number
+        else
+        {
+            return squareRoot * -1;
+        }
+
+    }
+
 
     @Override
     public String toString() {

@@ -46,6 +46,19 @@
         app:layout_constraintTop_toBottomOf="@+id/btnMultiplicar" />
 
     <Button
+        android:id="@+id/btnRaiz"
+        android:layout_width="162dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="12dp"
+        android:onClick="operacion"
+        android:text="sqrt"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.935"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnExponencial" />
+
+    <Button
         android:id="@+id/btnMultiplicar2"
         android:layout_width="162dp"
         android:layout_height="41dp"
@@ -71,14 +84,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvAlCuadrado"
-        android:layout_width="367dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="76dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:id="@+id/tvAlCuadrado"
+    android:layout_width="367dp"
+    android:layout_height="30dp"
+    android:layout_marginTop="76dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.053"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edAlCuadrado"
@@ -91,6 +104,7 @@
         app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvAlCuadrado" />
+
 
     <Button
         android:id="@+id/btnSumar"

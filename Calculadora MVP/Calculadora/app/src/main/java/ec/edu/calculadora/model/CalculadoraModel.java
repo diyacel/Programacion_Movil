@@ -68,12 +68,21 @@ public class CalculadoraModel implements Calculadora.Model {
                 break;
             case R.id.btnSeno:
                 calculadoraDTO.setOperacion("sen");
-                Log.d("modulo","sen");
+                Log.d("sen","sen");
                 break;
+            case R.id.btnRaiz:
+                calculadoraDTO.setOperacion("sqrt");
+                Log.d("sqrt","sqrt");
+                break;
+
         }
 
         if(calculadoraDTO.getResultado()==null){
-            calculadoraDTO.setOperaciones(calculadoraDTO.getOperaciones()+" "+Double.parseDouble(data)+" "+calculadoraDTO.getOperacion());
+            if(!calculadoraDTO.getOperacion().equals("sen")||!calculadoraDTO.getOperacion().equals("sqrt")) {
+                calculadoraDTO.setOperaciones(calculadoraDTO.getOperaciones() + " " + Double.parseDouble(data) + " " + calculadoraDTO.getOperacion());
+            }else{
+                calculadoraDTO.setOperaciones(calculadoraDTO.getOperaciones() + " " +calculadoraDTO.getOperacion());
+            }
             calculadoraDTO.setResultado(Double.parseDouble(data));
         }else{
             String operaciones = calculadoraDTO.getOperaciones();
@@ -154,6 +163,10 @@ public class CalculadoraModel implements Calculadora.Model {
             case "sen":
                 calculadoraDTO.setResultado(calculadoraDTO.seno(calculadoraDTO.getNumero()));
                 Log.d("seno",calculadoraDTO.getResultado().toString());
+                break;
+            case "sqrt":
+                calculadoraDTO.setResultado(calculadoraDTO.findSquareRoot(calculadoraDTO.getNumero()));
+                Log.d("sqrt",calculadoraDTO.getResultado().toString());
                 break;
 
             default:
