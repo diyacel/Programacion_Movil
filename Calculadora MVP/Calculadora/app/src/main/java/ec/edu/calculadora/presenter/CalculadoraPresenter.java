@@ -1,5 +1,7 @@
 package ec.edu.calculadora.presenter;
 
+import android.view.View;
+
 import ec.edu.calculadora.interfaces.Calculadora;
 import ec.edu.calculadora.model.CalculadoraModel;
 
@@ -37,9 +39,23 @@ public class CalculadoraPresenter implements Calculadora.Presenter{
     }
 
     @Override
+    public void setNumber(View number, String data) {
+        if(view!=null){
+            model.setNumber(number, data);
+        }
+    }
+
+    @Override
     public void showOperations(String operations) {
         if(view!=null){
             view.showOperations(operations);
+        }
+    }
+
+    @Override
+    public void showDeleteChar(String result) {
+        if(view!=null) {
+            view.showDeleteChar(result);
         }
     }
 
