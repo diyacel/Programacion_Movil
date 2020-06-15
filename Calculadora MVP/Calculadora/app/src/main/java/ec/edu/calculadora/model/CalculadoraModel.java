@@ -220,10 +220,13 @@ public class CalculadoraModel implements Calculadora.Model {
             presenter.showResult(calculadoraDTO.getResultado().toString());
             //calculadoraDTO.setOperacion("=");
             clickOpe = "S";
-            if (calculadoraDTO.getOperaciones().substring(calculadoraDTO.getOperaciones().length() - 1, calculadoraDTO.getOperaciones().length()).equals("=")) {
+            if (calculadoraDTO.getOperaciones().substring(calculadoraDTO.getOperaciones().length() - 1, calculadoraDTO.getOperaciones().length()).equals("=") && calculadoraDTO.getNumero()!=0) {
                 calculadoraDTO.setOperaciones(calculadoraDTO.getOperaciones().substring(0, calculadoraDTO.getOperaciones().length() - 1) + calculadoraDTO.getOperacion());
             }
-            calculadoraDTO.setOperaciones(calculadoraDTO.getOperaciones() + " " + calculadoraDTO.getNumero() + " =");
+
+            if(calculadoraDTO.getNumero()!=0){
+                calculadoraDTO.setOperaciones(calculadoraDTO.getOperaciones() + " " + calculadoraDTO.getNumero() + " =");
+            }
 
             presenter.showOperations(calculadoraDTO.getOperaciones());
         }

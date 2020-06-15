@@ -83,15 +83,14 @@
                 android:onClick="clearOperations"
                 android:text="AC" />
 
-            <ImageButton
+            <Button
                 android:id="@+id/delChar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
                 android:layout_weight="1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/ic_baseline_backspace_24" />
+                android:paddingRight="38dp"
+                android:drawableEnd="@drawable/ic_baseline_backspace_24"
+                android:onClick="number" />
 
         </LinearLayout>
 
