@@ -21,17 +21,11 @@ public class CalculadoraView extends AppCompatActivity implements Calculadora.Vi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.principal);
         operaciones=(TextView)findViewById(R.id.tvOperacion);
         numero=(TextView)findViewById(R.id.tvNumero);
         presenter = new CalculadoraPresenter(this);
-       // btnBorrar=findViewById(R.id.delChar);
-      /*  btnBorrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("hola1");
-            }
-        });*/
+
     }
 
     public void calcular (View view){

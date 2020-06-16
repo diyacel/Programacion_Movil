@@ -27,6 +27,7 @@ public class CalculadoraModel implements Calculadora.Model {
         operacion=new Operacion();
         numero=new Numero();
         resultado=new Numero();
+        resultado.setNumero(null);
     }
 
     @Override
@@ -78,7 +79,7 @@ public class CalculadoraModel implements Calculadora.Model {
         }
 
         if(resultado.getNumero()==null){
-            if(!operacion.getOperacion().equals("sen")||!operacion.getOperacion().equals("sqrt") ||!operacion.getOperacion().equals("cos")) {
+            if(operacion.getOperacion().equals("sen")||!operacion.getOperacion().equals("sqrt") ||!operacion.getOperacion().equals("cos")) {
                 operacion.setOperaciones(operacion.getOperaciones() + " " + Double.parseDouble(data) + " " + operacion.getOperacion());
             }else{
                 operacion.setOperaciones(operacion.getOperaciones() + " " +operacion.getOperacion());
@@ -171,17 +172,17 @@ public class CalculadoraModel implements Calculadora.Model {
     @Override
     public void clearResults() {
         Log.d("clearResults","clearResults");
-        resultado.setNumero(0.00);
-        numero.setNumero(0.00);
+        resultado.setNumero(null);
+        numero.setNumero(null);
         presenter.showResult("");
     }
 
     @Override
     public void clearOperations() {
         Log.d("clearResults","clearResults");
-        numero.setNumero(0.00);
+        resultado.setNumero(null);
         operacion.setOperaciones("");
-        resultado.setNumero(0.00);
+        numero.setNumero(null);
         presenter.showOperations("");
         presenter.showResult("");
     }

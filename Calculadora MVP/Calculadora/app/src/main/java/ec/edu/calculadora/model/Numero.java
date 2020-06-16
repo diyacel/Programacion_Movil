@@ -16,7 +16,7 @@ public class Numero
         return numero;
     }
 
-    public void setNumero(double numero) {
+    public void setNumero(Double numero) {
         this.numero = numero;
     }
 

@@ -87,7 +87,7 @@
                 android:text="AC" />
 
             <Button
-                android:id="@+id/delChar"
+                android:id="@+id/btnBorrar"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -121,7 +121,7 @@
                 android:text="!" />
 
             <Button
-                android:id="@+id/btnSeno"
+                android:id="@+id/btnSen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -301,7 +301,7 @@
                 android:text="Button" />
 
             <Button
-                android:id="@+id/_0"
+                android:id="@+id/btn0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -309,7 +309,7 @@
                 android:text="0" />
 
             <Button
-                android:id="@+id/dot"
+                android:id="@+id/btnPunto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
