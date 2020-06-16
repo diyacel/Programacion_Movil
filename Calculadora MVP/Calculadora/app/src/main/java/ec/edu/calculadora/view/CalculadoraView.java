@@ -22,8 +22,8 @@ public class CalculadoraView extends AppCompatActivity implements Calculadora.Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        operaciones=(TextView)findViewById(R.id.tvAlCuadrado);
-        numero=(TextView)findViewById(R.id.edAlCuadrado);
+        operaciones=(TextView)findViewById(R.id.tvOperacion);
+        numero=(TextView)findViewById(R.id.tvNumero);
         presenter = new CalculadoraPresenter(this);
        // btnBorrar=findViewById(R.id.delChar);
       /*  btnBorrar.setOnClickListener(new View.OnClickListener() {

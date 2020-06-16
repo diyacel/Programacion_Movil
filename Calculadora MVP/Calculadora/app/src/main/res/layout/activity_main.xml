@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tvAlCuadrado"
+            android:id="@+id/tvOperacion"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="76dp"
@@ -37,7 +37,7 @@
             android:paddingRight="15dp" />
 
         <TextView
-            android:id="@+id/edAlCuadrado"
+            android:id="@+id/tvNumero"
             android:layout_width="match_parent"
             android:layout_height="51dp"
             android:layout_marginTop="16dp"
@@ -71,7 +71,7 @@
                 android:text="Button" />
 
             <Button
-                android:id="@+id/btnRestar2"
+                android:id="@+id/btnC"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -79,7 +79,7 @@
                 android:text="C" />
 
             <Button
-                android:id="@+id/btnMultiplicar2"
+                android:id="@+id/btnC2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -110,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="operacion"
-                android:text="COS" />
+                android:text="cos" />
 
             <Button
                 android:id="@+id/btnFactorial"
@@ -163,7 +163,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="operacion"
-                android:text="sqrt" />
+                android:text="√" />
 
             <Button
                 android:id="@+id/btnDividir"
@@ -171,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="operacion"
-                android:text="/" />
+                android:text="÷" />
         </LinearLayout>
 
         <LinearLayout
@@ -180,7 +180,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/_1"
+                android:id="@+id/btn1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -188,7 +188,7 @@
                 android:text="1" />
 
             <Button
-                android:id="@+id/_2"
+                android:id="@+id/btn2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -196,7 +196,7 @@
                 android:text="2" />
 
             <Button
-                android:id="@+id/_3"
+                android:id="@+id/btn3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -218,7 +218,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/_4"
+                android:id="@+id/btn4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -226,7 +226,7 @@
                 android:text="4" />
 
             <Button
-                android:id="@+id/_5"
+                android:id="@+id/btn5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -234,7 +234,7 @@
                 android:text="5" />
 
             <Button
-                android:id="@+id/_6"
+                android:id="@+id/btn6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -256,7 +256,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/_7"
+                android:id="@+id/btn7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -264,7 +264,7 @@
                 android:text="7" />
 
             <Button
-                android:id="@+id/_8"
+                android:id="@+id/btn8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -272,7 +272,7 @@
                 android:text="8" />
 
             <Button
-                android:id="@+id/_9"
+                android:id="@+id/btn9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

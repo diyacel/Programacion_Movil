@@ -2,10 +2,6 @@ package ec.edu.calculadora.model;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
-
-import java.sql.SQLOutput;
-import java.util.jar.JarOutputStream;
 
 import ec.edu.calculadora.R;
 import ec.edu.calculadora.interfaces.Calculadora;
@@ -58,7 +54,7 @@ public class CalculadoraModel implements Calculadora.Model {
             case R.id.btnDividir:
                 operacion.setOperacion("/");
                 break;
-            case R.id.btnExponencial:
+            case R.id.btnElevar:
                 operacion.setOperacion("^");
                 break;
             case R.id.btnFactorial:
@@ -67,7 +63,7 @@ public class CalculadoraModel implements Calculadora.Model {
             case R.id.btnMod:
                 operacion.setOperacion("%");
                 break;
-            case R.id.btnSeno:
+            case R.id.btnSen:
                 operacion.setOperacion("sen");
                 break;
             case R.id.btnRaiz:
@@ -76,7 +72,7 @@ public class CalculadoraModel implements Calculadora.Model {
             case R.id.btnCos:
                 operacion.setOperacion("cos");
                 break;
-            case R.id.btnLogaritmo:
+            case R.id.btnLn:
                 operacion.setOperacion("ln");
                 break;
         }
@@ -129,46 +125,43 @@ public class CalculadoraModel implements Calculadora.Model {
         Log.d("Resetear",clickOpe);
 
         switch (number.getId()) {
-            case R.id._1:
+            case R.id.btn1:
                 presenter.showDeleteChar(data+1);
                 break;
-            case R.id._2:
+            case R.id.btn2:
                 presenter.showDeleteChar(data+2);
                 break;
-            case R.id._3:
+            case R.id.btn3:
                 presenter.showDeleteChar(data+3);
                 break;
-            case R.id._4:
+            case R.id.btn4:
                 presenter.showDeleteChar(data+4);
                 break;
-            case R.id._5:
+            case R.id.btn5:
                 presenter.showDeleteChar(data+5);
                 break;
-            case R.id._6:
+            case R.id.btn6:
                 presenter.showDeleteChar(data+6);
                 break;
-            case R.id._7:
+            case R.id.btn7:
                 presenter.showDeleteChar(data+7);
                 break;
-            case R.id._8:
+            case R.id.btn8:
                 presenter.showDeleteChar(data+8);
                 break;
-            case R.id._9:
+            case R.id.btn9:
                 presenter.showDeleteChar(data+9);
                 break;
-            case R.id._0:
+            case R.id.btn0:
                 presenter.showDeleteChar(data+0);
                 break;
-            case R.id.delChar:
+            case R.id.btnBorrar:
                 if(!data.equals(""))
                     presenter.showDeleteChar(data.substring(0,data.length()-1));
                 break;
-            case R.id.dot:
+            case R.id.btnPunto:
                 if(data.indexOf(".")==-1)
                     presenter.showDeleteChar(data+".");
-                break;
-            case R.id.btnLogaritmo:
-                System.out.println("holaaaaaa");
                 break;
 
         }
