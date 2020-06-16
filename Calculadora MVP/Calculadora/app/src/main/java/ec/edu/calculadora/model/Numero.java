@@ -2,10 +2,17 @@ package ec.edu.calculadora.model;
 
 public class Numero
 {
-    private double numero;
+    private Double numero;
 
+    public Numero() {
+        numero=null;
+    }
+    public Numero(String dato)
+    {
+        this.numero=Double.parseDouble(dato);
+    }
 
-    public double getNumero() {
+    public Double getNumero() {
         return numero;
     }
 
@@ -13,5 +20,10 @@ public class Numero
         this.numero = numero;
     }
 
-
+    @Override
+    public String toString() {
+        return "Numero{" +
+                "numero=" + numero +
+                '}';
+    }
 }

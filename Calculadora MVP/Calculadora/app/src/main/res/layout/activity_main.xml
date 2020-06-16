@@ -22,8 +22,8 @@
 
     <LinearLayout
         android:id="@+id/layoutResul"
-        android:layout_width="413dp"
-        android:layout_height="224dp"
+        android:layout_width="409dp"
+        android:layout_height="232dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -49,62 +49,68 @@
 
     <LinearLayout
         android:layout_width="409dp"
-        android:layout_height="505dp"
+        android:layout_height="497dp"
+        android:layout_marginTop="4dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutResul"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutResul">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="4">
 
             <Button
-                android:id="@+id/button22"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/btn22"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Button" />
 
             <Button
                 android:id="@+id/btnRestar2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="clearResults"
                 android:text="C" />
 
             <Button
                 android:id="@+id/btnMultiplicar2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="clearOperations"
                 android:text="AC" />
 
             <Button
                 android:id="@+id/delChar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:paddingRight="38dp"
                 android:drawableEnd="@drawable/ic_baseline_backspace_24"
-                android:onClick="number" />
+                android:drawableRight="@drawable/ic_baseline_backspace_24"
+                android:onClick="number"
+                android:paddingRight="38dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="4">
 
             <Button
-                android:id="@+id/button21"
+                android:id="@+id/btnCos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:onClick="operacion"
+                android:text="COS" />
 
             <Button
                 android:id="@+id/btnFactorial"
@@ -137,11 +143,11 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button20"
+                android:id="@+id/btnLogaritmo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="LN" />
 
             <Button
                 android:id="@+id/btnExponencial"

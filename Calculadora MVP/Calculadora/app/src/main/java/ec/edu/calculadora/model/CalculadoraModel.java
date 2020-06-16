@@ -4,6 +4,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import java.sql.SQLOutput;
+import java.util.jar.JarOutputStream;
+
 import ec.edu.calculadora.R;
 import ec.edu.calculadora.interfaces.Calculadora;
 
@@ -14,22 +17,25 @@ import ec.edu.calculadora.interfaces.Calculadora;
 
 public class CalculadoraModel implements Calculadora.Model {
 
-    private CalculadoraDTO calculadoraDTO;
     private Calculadora.Presenter presenter;
     private Boolean notClickIgual;
     private String clickOpe;
+    private Numero numero;
+    private Numero resultado;
+    private Operacion operacion;
 
     public CalculadoraModel(Calculadora.Presenter presenter){
         this.presenter=presenter;
-        this.calculadoraDTO = new CalculadoraDTO();
         this.notClickIgual = true;
         this.clickOpe = "N";
-        this.calculadoraDTO=new CalculadoraDTO() ;
+        operacion=new Operacion();
+        numero=new Numero();
+        resultado=new Numero();
     }
 
     @Override
     public void calculadora(String data) {
-        calculadoraDTO.setNumero(Double.parseDouble(data));
+        numero.setNumero(Double.parseDouble(data));
         calcular();
         notClickIgual = false;
     }
@@ -41,52 +47,58 @@ public class CalculadoraModel implements Calculadora.Model {
     public void operacion(View view, String data) {
         switch (view.getId()){
             case R.id.btnSumar:
-                calculadoraDTO.setOperacion("+");
+                operacion.setOperacion("+");
                 break;
             case R.id.btnRestar:
-                calculadoraDTO.setOperacion("-");
+                operacion.setOperacion("-");
                 break;
             case R.id.btnMultiplicar:
-                calculadoraDTO.setOperacion("*");
+                operacion.setOperacion("*");
                 break;
             case R.id.btnDividir:
-                calculadoraDTO.setOperacion("/");
+                operacion.setOperacion("/");
                 break;
             case R.id.btnExponencial:
-                calculadoraDTO.setOperacion("^");
+                operacion.setOperacion("^");
                 break;
             case R.id.btnFactorial:
-                calculadoraDTO.setOperacion("!");
+                operacion.setOperacion("!");
                 break;
             case R.id.btnMod:
-                calculadoraDTO.setOperacion("%");
+                operacion.setOperacion("%");
                 break;
             case R.id.btnSeno:
-                calculadoraDTO.setOperacion("sen");
+                operacion.setOperacion("sen");
                 break;
             case R.id.btnRaiz:
-                calculadoraDTO.setOperacion("sqrt");
+                operacion.setOperacion("sqrt");
+                break;
+            case R.id.btnCos:
+                operacion.setOperacion("cos");
+                break;
+            case R.id.btnLogaritmo:
+                operacion.setOperacion("ln");
                 break;
         }
 
-        if(calculadoraDTO.getResultado()==null){
-            if(!calculadoraDTO.getOperacion().equals("sen")||!calculadoraDTO.getOperacion().equals("sqrt")) {
-                calculadoraDTO.setOperaciones(calculadoraDTO.getOperaciones() + " " + Double.parseDouble(data) + " " + calculadoraDTO.getOperacion());
+        if(resultado.getNumero()==null){
+            if(!operacion.getOperacion().equals("sen")||!operacion.getOperacion().equals("sqrt") ||!operacion.getOperacion().equals("cos")) {
+                operacion.setOperaciones(operacion.getOperaciones() + " " + Double.parseDouble(data) + " " + operacion.getOperacion());
             }else{
-                calculadoraDTO.setOperaciones(calculadoraDTO.getOperaciones() + " " +calculadoraDTO.getOperacion());
+                operacion.setOperaciones(operacion.getOperaciones() + " " +operacion.getOperacion());
             }
             clickOpe = "S";
             Log.d("Resetear",clickOpe);
-            calculadoraDTO.setResultado(Double.parseDouble(data));
+            resultado.setNumero(Double.parseDouble(data));
         }else{
-            String operaciones = calculadoraDTO.getOperaciones();
+            String operaciones = operacion.getOperaciones();
             operaciones = operaciones.substring(0,operaciones.length()-1);
             Log.d("operaciones",operaciones);
-            calculadoraDTO.setOperaciones(operaciones+calculadoraDTO.getOperacion());
+            operacion.setOperaciones(operaciones+operacion.getOperacion());
             Log.d("Resetear",clickOpe);
         }
 
-        presenter.showOperations(calculadoraDTO.getOperaciones());
+        presenter.showOperations(operacion.getOperaciones());
         /*if(!notClickIgual){
             if(!calculadoraDTO.getNumero().equals(Double.parseDouble(data))){
                 notClickIgual = true;
@@ -155,80 +167,88 @@ public class CalculadoraModel implements Calculadora.Model {
                 if(data.indexOf(".")==-1)
                     presenter.showDeleteChar(data+".");
                 break;
+            case R.id.btnLogaritmo:
+                System.out.println("holaaaaaa");
+                break;
 
         }
+
     }
 
     @Override
     public void clearResults() {
         Log.d("clearResults","clearResults");
-        calculadoraDTO.setResultado(0.0);
-        calculadoraDTO.setNumero(0.0);
+        resultado.setNumero(0.00);
+        numero.setNumero(0.00);
         presenter.showResult("");
     }
 
     @Override
     public void clearOperations() {
         Log.d("clearResults","clearResults");
-        calculadoraDTO.setNumero(0.0);
-        calculadoraDTO.setOperaciones("");
-        calculadoraDTO.setResultado(null);
+        numero.setNumero(0.00);
+        operacion.setOperaciones("");
+        resultado.setNumero(0.00);
         presenter.showOperations("");
         presenter.showResult("");
     }
 
     private void calcular(){
-        if(calculadoraDTO.getResultado()!=null) {
-            switch (this.calculadoraDTO.getOperacion()) {
+        if(resultado.getNumero()!=null) {
+            switch (this.operacion.getOperacion()) {
                 case "+":
-                    calculadoraDTO.setResultado(calculadoraDTO.sumar(calculadoraDTO.getResultado(), calculadoraDTO.getNumero()));
-                    Log.d("resultado suma", calculadoraDTO.getResultado().toString());
+                    resultado.setNumero(operacion.sumar(resultado.getNumero(),numero.getNumero()));
+                    Log.d("resultado suma",resultado.getNumero().toString());
                     break;
                 case "-":
-                    calculadoraDTO.setResultado(calculadoraDTO.restar(calculadoraDTO.getResultado(), calculadoraDTO.getNumero()));
-                    Log.d("resultado resta", calculadoraDTO.getResultado().toString());
+                    resultado.setNumero(operacion.restar(resultado.getNumero(), numero.getNumero()));
+                    Log.d("resultado resta",resultado.getNumero().toString());
                     break;
                 case "*":
-                    calculadoraDTO.setResultado(calculadoraDTO.multiplicar(calculadoraDTO.getResultado(), calculadoraDTO.getNumero()));
-                    Log.d("resultado multiplicar", calculadoraDTO.getResultado().toString());
+                    resultado.setNumero(operacion.multiplicar(resultado.getNumero(), numero.getNumero()));
+                    Log.d("resultado multiplicar", resultado.getNumero().toString());
                     break;
                 case "/":
-                    calculadoraDTO.setResultado(calculadoraDTO.dividir(calculadoraDTO.getResultado(), calculadoraDTO.getNumero()));
-                    Log.d("resultado dividir", calculadoraDTO.getResultado().toString());
+                    resultado.setNumero(operacion.dividir(resultado.getNumero(), numero.getNumero()));
+                    Log.d("resultado dividir", resultado.getNumero().toString());
                     break;
                 case "^":
-                    calculadoraDTO.setResultado(calculadoraDTO.exponenciar(calculadoraDTO.getResultado(), calculadoraDTO.getNumero()));
-                    Log.d("resultado exponencial", calculadoraDTO.getResultado().toString());
+                    resultado.setNumero(operacion.exponenciar(resultado.getNumero(),numero.getNumero()));
+                    Log.d("resultado exponencial", resultado.getNumero().toString());
                     break;
                 case "!":
-                    calculadoraDTO.setResultado(calculadoraDTO.factorial(calculadoraDTO.getNumero()));
-                    Log.d("resultado Factorial", calculadoraDTO.getResultado().toString());
+                    resultado.setNumero(operacion.factorial(numero.getNumero()));
+                    Log.d("resultado Factorial", resultado.getNumero().toString());
                     break;
                 case "%":
                     //calculadoraDTO.setResultado(calculadoraDTO.factorial(calculadoraDTO.getNumero()));
                     //Log.d("resultado Factorial",calculadoraDTO.getResultado().toString());
                     break;
                 case "sen":
-                    calculadoraDTO.setResultado(calculadoraDTO.seno(calculadoraDTO.getNumero()));
-                    Log.d("seno", calculadoraDTO.getResultado().toString());
+                    resultado.setNumero(operacion.seno(numero.getNumero()));
+                    Log.d("seno", resultado.getNumero().toString());
                     break;
                 case "sqrt":
-                    calculadoraDTO.setResultado(calculadoraDTO.findSquareRoot(calculadoraDTO.getNumero()));
-                    Log.d("sqrt", calculadoraDTO.getResultado().toString());
+                    resultado.setNumero(operacion.findSquareRoot(numero.getNumero()));
+                    Log.d("sqrt", resultado.getNumero().toString());
                     break;
+                case "cos":
+                    resultado.setNumero(operacion.coseno(numero.getNumero()));
+                    Log.d("coseno", resultado.getNumero().toString());
+                    break;
+                case "ln":
+                    System.out.println("logaritmo");
+                    break;
+
             }
-            presenter.showResult(calculadoraDTO.getResultado().toString());
-            //calculadoraDTO.setOperacion("=");
+            presenter.showResult(resultado.getNumero().toString());
             clickOpe = "S";
-            if (calculadoraDTO.getOperaciones().substring(calculadoraDTO.getOperaciones().length() - 1, calculadoraDTO.getOperaciones().length()).equals("=") && calculadoraDTO.getNumero()!=0) {
-                calculadoraDTO.setOperaciones(calculadoraDTO.getOperaciones().substring(0, calculadoraDTO.getOperaciones().length() - 1) + calculadoraDTO.getOperacion());
+            if (operacion.getOperaciones().substring(operacion.getOperaciones().length() - 1, operacion.getOperaciones().length()).equals("=")) {
+                operacion.setOperaciones(operacion.getOperaciones().substring(0, operacion.getOperaciones().length() - 1) + operacion.getOperacion());
             }
+            operacion.setOperaciones(operacion.getOperaciones() + " " + numero.getNumero() + " =");
 
-            if(calculadoraDTO.getNumero()!=0){
-                calculadoraDTO.setOperaciones(calculadoraDTO.getOperaciones() + " " + calculadoraDTO.getNumero() + " =");
-            }
-
-            presenter.showOperations(calculadoraDTO.getOperaciones());
+            presenter.showOperations(operacion.getOperaciones());
         }
     }
 }
