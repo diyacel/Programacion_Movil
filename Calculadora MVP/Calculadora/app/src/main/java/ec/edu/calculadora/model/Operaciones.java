@@ -1,5 +1,7 @@
 package ec.edu.calculadora.model;
 
+import android.widget.Toast;
+
 public class Operaciones {
     private Numero resultado;
     private Numero numero;
@@ -97,6 +99,7 @@ public class Operaciones {
     public void mod(){
         resultado.setNumero(modulo(resultado.getNumero(),numero.getNumero()));
     }
+
 
     public Double exponencial(double a, double b)
     {
@@ -200,4 +203,55 @@ public class Operaciones {
             return resto;
         }
     }
+
+    public String decimalAHexadecimal(int decimal) {
+        String hexadecimal = "";
+        String caracteresHexadecimales = "0123456789ABCDEF";
+        while (decimal > 0) {
+            int residuo = decimal % 16;
+            hexadecimal = caracteresHexadecimales.charAt(residuo) + hexadecimal; // Agregar a la izquierda
+            decimal /= 16;
+        }
+        return hexadecimal;
+    }
+
+    public String decimalAOctal(int decimal) {
+        String octal = "";// Almacenamos el número octal que será el resultado
+        String caracteresOctales = "01234567";
+        while (decimal > 0) {
+            int residuo = decimal % 8;
+            // El residuo es lo que se suma, y podemos usarlo como índice
+            // Recordemos que el carácter se pone "a la izquierda", por eso
+            // concatenamos el carácter y luego lo que ya lleva sumado el octal
+            octal = (caracteresOctales.charAt(residuo) + octal);
+            // Lo vamos dividiendo entre 8 para que en algún momento llegue a 0
+            decimal /= 8;
+        }
+        return octal;
+    }
+
+    public String decimalABinario(int numero)
+    {
+        String binario="";
+        if(numero>0)
+        {
+            while(numero>0)
+            {
+                if(numero%2==0)
+                {
+                    binario="0"+binario;
+                }
+                else{
+                    binario="1"+binario;
+                }
+                numero=(int)numero/2;
+            }
+        }else if(numero==0)
+        {
+            binario="0";
+        }
+        return binario;
+
+    }
+
 }

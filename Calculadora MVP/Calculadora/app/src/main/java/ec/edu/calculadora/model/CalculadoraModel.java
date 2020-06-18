@@ -76,6 +76,15 @@ public class CalculadoraModel implements Calculadora.Model {
             case R.id.btnCos:
                 operaciones.setOperacion("cos");
                 break;
+            case R.id.btnBinario:
+                operaciones.setOperacion("bin");
+                break;
+            case R.id.btnOctal:
+                operaciones.setOperacion("oct");
+                break;
+            case R.id.btnHexadecimal:
+                operaciones.setOperacion("hex");
+                break;
 
         }
 
@@ -143,6 +152,16 @@ public class CalculadoraModel implements Calculadora.Model {
                     rec = true;
                 }
                 break;
+            case R.id.btnBinario:
+                presenter.showResult(operaciones.decimalABinario(Integer.parseInt(data)));
+                System.out.println("resultado: "+operaciones.decimalABinario((Integer.parseInt(data))));
+                break;
+            case R.id.btnOctal:
+                presenter.showResult(operaciones.decimalAOctal(Integer.parseInt(data)));
+                break;
+            case R.id.btnHexadecimal:
+                presenter.showResult(operaciones.decimalAHexadecimal(Integer.parseInt(data)));
+                break;
         }
 
         if(clickOpe.equals("S")){
@@ -193,6 +212,7 @@ public class CalculadoraModel implements Calculadora.Model {
                 if(!data.equals(""))
                     presenter.showDeleteChar(String.valueOf(Double.parseDouble(data)*-1));
                 break;
+
 
         }
     }

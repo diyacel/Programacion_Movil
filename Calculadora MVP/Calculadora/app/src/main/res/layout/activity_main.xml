@@ -98,12 +98,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+
             <Button
-                android:id="@+id/button22"
+                android:id="@+id/btnFactorial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:onClick="operacion"
+                android:text="!" />
 
             <Button
                 android:id="@+id/btnRestar2"
@@ -138,6 +140,29 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/btnBinario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="number"
+                android:text="Bin" />
+
+            <Button
+                android:id="@+id/btnOctal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="number"
+                android:text="oct" />
+
+            <Button
+                android:id="@+id/btnHexadecimal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="number"
+                android:text="hex" />
+            <Button
                 android:id="@+id/btnCos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -145,13 +170,7 @@
                 android:layout_weight="1"
                 android:text="cos" />
 
-            <Button
-                android:id="@+id/btnFactorial"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="operacion"
-                android:text="!" />
+
 
             <Button
                 android:id="@+id/btnSeno"
@@ -161,6 +180,14 @@
                 android:onClick="operacion"
                 android:text="sen" />
 
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
             <Button
                 android:id="@+id/btnMod"
                 android:layout_width="wrap_content"
@@ -168,19 +195,7 @@
                 android:layout_weight="1"
                 android:onClick="operacion"
                 android:text="mod" />
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button20"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Button" />
 
             <Button
                 android:id="@+id/btnExponencial"
