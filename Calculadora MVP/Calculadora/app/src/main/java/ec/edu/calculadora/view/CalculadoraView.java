@@ -2,7 +2,6 @@ package ec.edu.calculadora.view;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,26 +16,25 @@ public class CalculadoraView extends AppCompatActivity implements Calculadora.Vi
     private TextView numero;
 
     private Calculadora.Presenter presenter;
-    private ImageButton btnBorrar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.principal);
-        operaciones=(TextView)findViewById(R.id.tvOperacion);
-        numero=(TextView)findViewById(R.id.tvNumero);
+        setContentView(R.layout.activity_main);
+        operaciones=(TextView)findViewById(R.id.tvAlCuadrado);
+        numero=(TextView)findViewById(R.id.edAlCuadrado);
         presenter = new CalculadoraPresenter(this);
-
     }
 
-    public void calcular (View view){
+    public void calcular(View view){
         presenter.calculadora(numero.getText().toString());
     }
 
-    public void operacion (View view){
+    public void operacion(View view){
         presenter.operacion(view, numero.getText().toString());
     }
 
-    public void number (View view){
+    public void number(View view){
         presenter.setNumber(view, numero.getText().toString());
     }
 
@@ -62,7 +60,5 @@ public class CalculadoraView extends AppCompatActivity implements Calculadora.Vi
     public void showOperations(String operations) {
         operaciones.setText(operations);
     }
-
-
 
 }

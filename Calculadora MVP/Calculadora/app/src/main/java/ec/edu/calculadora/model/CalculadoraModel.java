@@ -3,6 +3,9 @@ package ec.edu.calculadora.model;
 import android.util.Log;
 import android.view.View;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import ec.edu.calculadora.R;
 import ec.edu.calculadora.interfaces.Calculadora;
 
@@ -13,28 +16,28 @@ import ec.edu.calculadora.interfaces.Calculadora;
 
 public class CalculadoraModel implements Calculadora.Model {
 
+    private Operaciones operaciones;
     private Calculadora.Presenter presenter;
-    private Boolean notClickIgual;
     private String clickOpe;
     private Numero numero;
-    private Numero resultado;
-    private Operacion operacion;
+    private Boolean rec;
 
     public CalculadoraModel(Calculadora.Presenter presenter){
         this.presenter=presenter;
-        this.notClickIgual = true;
+        this.operaciones = new Operaciones();
         this.clickOpe = "N";
-        operacion=new Operacion();
-        numero=new Numero();
-        resultado=new Numero();
-        resultado.setNumero(null);
+        this.numero = new Numero();
+        this.rec = false;
     }
 
     @Override
     public void calculadora(String data) {
+        this.numero = new Numero();
         numero.setNumero(Double.parseDouble(data));
-        calcular();
-        notClickIgual = false;
+        operaciones.setNumero(numero);
+        if(operaciones.getOperacion()!=""){
+            calcular();
+        }
     }
     /**
      * @param view la vista con la que se va a interactuar
@@ -44,205 +47,219 @@ public class CalculadoraModel implements Calculadora.Model {
     public void operacion(View view, String data) {
         switch (view.getId()){
             case R.id.btnSumar:
-                operacion.setOperacion("+");
+                operaciones.setOperacion("+");
                 break;
             case R.id.btnRestar:
-                operacion.setOperacion("-");
+                operaciones.setOperacion("-");
                 break;
             case R.id.btnMultiplicar:
-                operacion.setOperacion("*");
+                operaciones.setOperacion("*");
                 break;
             case R.id.btnDividir:
-                operacion.setOperacion("/");
+                operaciones.setOperacion("/");
                 break;
-            case R.id.btnElevar:
-                operacion.setOperacion("^");
+            case R.id.btnExponencial:
+                operaciones.setOperacion("^");
                 break;
             case R.id.btnFactorial:
-                operacion.setOperacion("!");
+                operaciones.setOperacion("fact");
                 break;
             case R.id.btnMod:
-                operacion.setOperacion("%");
+                operaciones.setOperacion("%");
                 break;
-            case R.id.btnSen:
-                operacion.setOperacion("sen");
+            case R.id.btnSeno:
+                operaciones.setOperacion("sen");
                 break;
             case R.id.btnRaiz:
-                operacion.setOperacion("sqrt");
+                operaciones.setOperacion("sqrt");
                 break;
             case R.id.btnCos:
-                operacion.setOperacion("cos");
+                operaciones.setOperacion("cos");
                 break;
-            case R.id.btnLn:
-                operacion.setOperacion("ln");
-                break;
+
         }
 
-        if(resultado.getNumero()==null){
-            if(operacion.getOperacion().equals("sen")||!operacion.getOperacion().equals("sqrt") ||!operacion.getOperacion().equals("cos")) {
-                operacion.setOperaciones(operacion.getOperaciones() + " " + Double.parseDouble(data) + " " + operacion.getOperacion());
+        OperacionesShow(data);
+    }
+
+    public void OperacionesShow(String data){
+        if(operaciones.getResultado()==null){
+            if(!operaciones.getOperacion().equals("sen")&&!operaciones.getOperacion().equals("sqrt")&&!operaciones.getOperacion().equals("fact")&&!operaciones.getOperacion().equals("cos")) {
+                operaciones.setOperaciones(operaciones.getOperaciones() + " " + Double.parseDouble(data) + " " + operaciones.getOperacion());
             }else{
-                operacion.setOperaciones(operacion.getOperaciones() + " " +operacion.getOperacion());
+                operaciones.setOperaciones(operaciones.getOperaciones() + " " + operaciones.getOperacion());
             }
             clickOpe = "S";
-            Log.d("Resetear",clickOpe);
-            resultado.setNumero(Double.parseDouble(data));
+            numero.setNumero(Double.parseDouble(data));
+            operaciones.setResultado(numero);
         }else{
-            String operaciones = operacion.getOperaciones();
-            operaciones = operaciones.substring(0,operaciones.length()-1);
-            Log.d("operaciones",operaciones);
-            operacion.setOperaciones(operaciones+operacion.getOperacion());
-            Log.d("Resetear",clickOpe);
-        }
-
-        presenter.showOperations(operacion.getOperaciones());
-        /*if(!notClickIgual){
-            if(!calculadoraDTO.getNumero().equals(Double.parseDouble(data))){
-                notClickIgual = true;
+            if(rec){
+                clickOpe = "S";
+                rec = false;
+            }
+            if(!operaciones.getOperacion().equals("sen")&&!operaciones.getOperacion().equals("sqrt")&&!operaciones.getOperacion().equals("fact")&&!operaciones.getOperacion().equals("cos")) {
+                String operaciones = this.operaciones.getOperaciones();
+                operaciones = operaciones.substring(0,operaciones.length()-1);
+                this.operaciones.setOperaciones(operaciones+ this.operaciones.getOperacion());
+            }else{
+                this.operaciones.setOperaciones(this.operaciones.getOperacion());
             }
         }
 
-        if(calculadoraDTO.getResultado()==null){
-            calculadoraDTO.setResultado(Double.parseDouble(data));
-            calculadoraDTO.setOperaciones(calculadoraDTO.getOperaciones()+" "+Double.parseDouble(data)+" "+calculadoraDTO.getOperacion());
-            presenter.showOperations(calculadoraDTO.getOperaciones());
-        }else{
-            calculadoraDTO.setNumero(Double.parseDouble(data));
-            if(notClickIgual){
-                calcular();
-            }
-        }*/
-
-        //Log.d("resultado",calculadoraDTO.getResultado().toString());
+        presenter.showOperations(operaciones.getOperaciones());
     }
 
     @Override
         public void setNumber(View number, String data) {
 
+        switch (number.getId()) {
+            case R.id.btnMC:
+                numero=new Numero();
+                numero.setNumero(0.0);
+                operaciones.setRecord(numero);
+                this.clickOpe = "S";
+                rec = true;
+                break;
+            case R.id.btnMR:
+                presenter.showDeleteChar(operaciones.getRecord().getNumero().toString());
+                this.clickOpe = "S";
+                rec = true;
+                break;
+            case R.id.btnMPlus:
+                if(!data.equals("")) {
+                    numero = new Numero();
+                    numero.setNumero(operaciones.getRecord().getNumero()+Double.parseDouble(data));
+                    operaciones.setRecord(numero);
+                    this.clickOpe = "S";
+                    rec = true;
+                }
+                break;
+            case R.id.btnMLess:
+                if(!data.equals("")) {
+                    numero = new Numero();
+                    numero.setNumero(operaciones.getRecord().getNumero()-Double.parseDouble(data));
+                    operaciones.setRecord(numero);
+                    this.clickOpe = "S";
+                    rec = true;
+                }
+                break;
+        }
+
         if(clickOpe.equals("S")){
             data="";
             clickOpe ="N";
         }
-        Log.d("Resetear",clickOpe);
 
         switch (number.getId()) {
-            case R.id.btn1:
+            case R.id._1:
                 presenter.showDeleteChar(data+1);
                 break;
-            case R.id.btn2:
+            case R.id._2:
                 presenter.showDeleteChar(data+2);
                 break;
-            case R.id.btn3:
+            case R.id._3:
                 presenter.showDeleteChar(data+3);
                 break;
-            case R.id.btn4:
+            case R.id._4:
                 presenter.showDeleteChar(data+4);
                 break;
-            case R.id.btn5:
+            case R.id._5:
                 presenter.showDeleteChar(data+5);
                 break;
-            case R.id.btn6:
+            case R.id._6:
                 presenter.showDeleteChar(data+6);
                 break;
-            case R.id.btn7:
+            case R.id._7:
                 presenter.showDeleteChar(data+7);
                 break;
-            case R.id.btn8:
+            case R.id._8:
                 presenter.showDeleteChar(data+8);
                 break;
-            case R.id.btn9:
+            case R.id._9:
                 presenter.showDeleteChar(data+9);
                 break;
-            case R.id.btn0:
+            case R.id._0:
                 presenter.showDeleteChar(data+0);
                 break;
-            case R.id.btnBorrar:
+            case R.id.delChar:
                 if(!data.equals(""))
                     presenter.showDeleteChar(data.substring(0,data.length()-1));
                 break;
-            case R.id.btnPunto:
+            case R.id.dot:
                 if(data.indexOf(".")==-1)
                     presenter.showDeleteChar(data+".");
                 break;
+            case R.id.btnNeg:
+                if(!data.equals(""))
+                    presenter.showDeleteChar(String.valueOf(Double.parseDouble(data)*-1));
+                break;
 
         }
-
     }
 
     @Override
     public void clearResults() {
-        Log.d("clearResults","clearResults");
-        resultado.setNumero(null);
-        numero.setNumero(null);
+        operaciones.setResultado(null);
+        operaciones.setNumero(null);
         presenter.showResult("");
     }
 
     @Override
     public void clearOperations() {
-        Log.d("clearResults","clearResults");
-        resultado.setNumero(null);
-        operacion.setOperaciones("");
-        numero.setNumero(null);
+        operaciones.setNumero(null);
+        operaciones.setOperaciones("");
+        operaciones.setResultado(null);
         presenter.showOperations("");
         presenter.showResult("");
     }
 
     private void calcular(){
-        if(resultado.getNumero()!=null) {
-            switch (this.operacion.getOperacion()) {
+        if(operaciones.getResultado().getNumero()!=null) {
+            switch (this.operaciones.getOperacion()) {
                 case "+":
-                    resultado.setNumero(operacion.sumar(resultado.getNumero(),numero.getNumero()));
-                    Log.d("resultado suma",resultado.getNumero().toString());
+                    operaciones.sumar();
                     break;
                 case "-":
-                    resultado.setNumero(operacion.restar(resultado.getNumero(), numero.getNumero()));
-                    Log.d("resultado resta",resultado.getNumero().toString());
+                    operaciones.restar();
                     break;
                 case "*":
-                    resultado.setNumero(operacion.multiplicar(resultado.getNumero(), numero.getNumero()));
-                    Log.d("resultado multiplicar", resultado.getNumero().toString());
+                    operaciones.multiplicar();
                     break;
                 case "/":
-                    resultado.setNumero(operacion.dividir(resultado.getNumero(), numero.getNumero()));
-                    Log.d("resultado dividir", resultado.getNumero().toString());
+                    operaciones.dividir();
                     break;
                 case "^":
-                    resultado.setNumero(operacion.exponenciar(resultado.getNumero(),numero.getNumero()));
-                    Log.d("resultado exponencial", resultado.getNumero().toString());
+                    operaciones.pow();
                     break;
-                case "!":
-                    resultado.setNumero(operacion.factorial(numero.getNumero()));
-                    Log.d("resultado Factorial", resultado.getNumero().toString());
+                case "fact":
+                    operaciones.fact();
                     break;
                 case "%":
-                    //calculadoraDTO.setResultado(calculadoraDTO.factorial(calculadoraDTO.getNumero()));
-                    //Log.d("resultado Factorial",calculadoraDTO.getResultado().toString());
+                    operaciones.mod();
                     break;
                 case "sen":
-                    resultado.setNumero(operacion.seno(numero.getNumero()));
-                    Log.d("seno", resultado.getNumero().toString());
+                    operaciones.sen();
                     break;
                 case "sqrt":
-                    resultado.setNumero(operacion.findSquareRoot(numero.getNumero()));
-                    Log.d("sqrt", resultado.getNumero().toString());
+                    operaciones.raiz();
                     break;
                 case "cos":
-                    resultado.setNumero(operacion.coseno(numero.getNumero()));
-                    Log.d("coseno", resultado.getNumero().toString());
-                    break;
-                case "ln":
-                    System.out.println("logaritmo");
+                    operaciones.cos();
                     break;
 
             }
-            presenter.showResult(resultado.getNumero().toString());
+            BigDecimal formatNumber = new BigDecimal(operaciones.getResultado().getNumero());
+            formatNumber = formatNumber.setScale(2, RoundingMode.DOWN);
+            presenter.showResult(operaciones.getResultado().getNumero().toString());
+
             clickOpe = "S";
-            if (operacion.getOperaciones().substring(operacion.getOperaciones().length() - 1, operacion.getOperaciones().length()).equals("=")) {
-                operacion.setOperaciones(operacion.getOperaciones().substring(0, operacion.getOperaciones().length() - 1) + operacion.getOperacion());
+            if (operaciones.getOperaciones().substring(operaciones.getOperaciones().length() - 1, operaciones.getOperaciones().length()).equals("=") && operaciones.getNumero().getNumero()!=0) {
+                operaciones.setOperaciones(operaciones.getOperaciones().substring(0, operaciones.getOperaciones().length() - 1) + operaciones.getOperacion());
             }
-            operacion.setOperaciones(operacion.getOperaciones() + " " + numero.getNumero() + " =");
-
-            presenter.showOperations(operacion.getOperaciones());
+            if(operaciones.getNumero().getNumero()!=0){
+                operaciones.setOperaciones(operaciones.getOperaciones() + " " + operaciones.getNumero().getNumero() + " =");
+            }
+            presenter.showOperations(operaciones.getOperaciones());
         }
     }
 }
