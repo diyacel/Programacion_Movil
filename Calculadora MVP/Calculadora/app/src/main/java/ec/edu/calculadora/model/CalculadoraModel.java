@@ -282,4 +282,6 @@ public class CalculadoraModel implements Calculadora.Model {
             presenter.showOperations(operaciones.getOperaciones());
         }
     }
+
+
 }
