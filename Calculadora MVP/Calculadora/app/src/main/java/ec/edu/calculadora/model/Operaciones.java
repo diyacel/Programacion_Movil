@@ -173,9 +173,9 @@ public class Operaciones {
 
         return factorial;
     }
-    static Double factorial2(Double numero) {
+    static double factorial2(double numero) {
         double factorial = 1.0d;
-        if(numero<0)
+
         while (numero != 0) {
             factorial *= numero--;
         }

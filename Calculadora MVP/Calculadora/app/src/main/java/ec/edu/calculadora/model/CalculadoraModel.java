@@ -89,7 +89,7 @@ public class CalculadoraModel implements Calculadora.Model {
                 operaciones.setOperacion("hex");
                 break;
             case R.id.btnLog:
-                operaciones.setOperacion("Log");
+                operaciones.setOperacion("log");
                 break;
 
         }
@@ -99,7 +99,7 @@ public class CalculadoraModel implements Calculadora.Model {
 
     public void OperacionesShow(String data){
         if(operaciones.getResultado()==null){
-            if(!operaciones.getOperacion().equals("sen")&&!operaciones.getOperacion().equals("sqrt")&&!operaciones.getOperacion().equals("fact")&&!operaciones.getOperacion().equals("cos")) {
+            if(!operaciones.getOperacion().equals("sen")&&!operaciones.getOperacion().equals("sqrt")&&!operaciones.getOperacion().equals("fact")&&!operaciones.getOperacion().equals("cos")&&!operaciones.getOperacion().equals("log")) {
                 operaciones.setOperaciones(operaciones.getOperaciones() + " " + Double.parseDouble(data) + " " + operaciones.getOperacion());
             }else{
                 operaciones.setOperaciones(operaciones.getOperaciones() + " " + operaciones.getOperacion());
@@ -112,7 +112,7 @@ public class CalculadoraModel implements Calculadora.Model {
                 clickOpe = "S";
                 rec = false;
             }
-            if(!operaciones.getOperacion().equals("sen")&&!operaciones.getOperacion().equals("sqrt")&&!operaciones.getOperacion().equals("fact")&&!operaciones.getOperacion().equals("cos")) {
+            if(!operaciones.getOperacion().equals("sen")&&!operaciones.getOperacion().equals("sqrt")&&!operaciones.getOperacion().equals("fact")&&!operaciones.getOperacion().equals("cos")&&!operaciones.getOperacion().equals("log")) {
                 String operaciones = this.operaciones.getOperaciones();
                 operaciones = operaciones.substring(0,operaciones.length()-1);
                 this.operaciones.setOperaciones(operaciones+ this.operaciones.getOperacion());
@@ -219,12 +219,7 @@ public class CalculadoraModel implements Calculadora.Model {
                 if(!data.equals(""))
                 {
                     presenter.showDeleteChar(String.valueOf(Double.parseDouble(data)*-1));
-                    //Double wd1 = new Double(-1);
-                    //wd1=wd1*operaciones.getNumero().getNumero();
-                    //Numero n=new Numero(wd1);
-                    //operaciones.setNumero(n);
                 }
-
                 break;
 
 

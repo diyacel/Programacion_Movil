@@ -150,7 +150,6 @@ public class CalculadoraView extends AppCompatActivity implements Calculadora.Vi
         {
             case R.id._0:
                 number(v);
-
                 break;
             case R.id._1:
                 number(v);
@@ -211,6 +210,7 @@ public class CalculadoraView extends AppCompatActivity implements Calculadora.Vi
                 break;
             case R.id.btnNeg:
                 number(v);
+                break;
             case R.id.btnBinario:
                 number(v);
                 break;
