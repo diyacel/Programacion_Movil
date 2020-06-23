@@ -76,12 +76,12 @@ public class Operaciones {
         resultado.setNumero(resultado.getNumero()/numero.getNumero());
     }
 
-    public void raiz(){
-        resultado.setNumero(findSquareRoot(resultado.getNumero()));
-    }
+    public void raiz(String mensaje){
+       resultado.setNumero(findSquareRoot(resultado.getNumero(),mensaje)) ;   }
 
-    public void fact(){
-        resultado.setNumero(factorial(resultado.getNumero()));
+    public String fact(String mensaje){
+        resultado.setNumero(factorial(resultado.getNumero(),mensaje));
+        return mensaje;
     }
 
     public void pow(){
@@ -118,7 +118,7 @@ public class Operaciones {
         int n = 0;
 
         do {
-            sumando = (exponencial(-1, n) / factorial((2.0*n)+1)) * exponencial(angulo, (2*n)+1);
+            sumando = (exponencial(-1, n) / factorial2((2.0*n)+1)) * exponencial(angulo, (2*n)+1);
             sumatoria = sumatoria + sumando;
             n +=1;
         } while (Math.abs(sumando) > precision);
@@ -135,7 +135,7 @@ public class Operaciones {
         int n = 0;
 
         do {
-            sumando = exponencial(-1, n) / factorial(2.0 * n) * exponencial(angulo, 2 * n);
+            sumando = exponencial(-1, n) / factorial2(2.0 * n) * exponencial(angulo, 2 * n);
             sumatoria = sumatoria + sumando;
             n = n + 1;
         } while (Math.abs(sumando) > precision);
@@ -143,9 +143,25 @@ public class Operaciones {
         return sumatoria;
     }
 
-    static Double factorial(Double numero) {
+    static Double factorial(Double numero,String estado) {
         double factorial = 1.0d;
+        estado="factorial";
+        estado="No se debe ingresar numeros negativos";
+        if(numero<0)
+            //estado="No se debe ingresar numeros negativos";
+            System.out.println("negativo");
+        else
+            //estado="es positivo";
+        System.out.println("positivo");
+        while (numero != 0) {
+            factorial *= numero--;
+        }
 
+        return factorial;
+    }
+    static Double factorial2(Double numero) {
+        double factorial = 1.0d;
+        if(numero<0)
         while (numero != 0) {
             factorial *= numero--;
         }
@@ -153,7 +169,7 @@ public class Operaciones {
         return factorial;
     }
 
-    public Double findSquareRoot(Double number)
+    public Double findSquareRoot(Double number,String estado)
     {
         boolean isPositiveNumber = true;
         Double g1;
@@ -178,30 +194,33 @@ public class Operaciones {
 
         if(isPositiveNumber)
         {
+            System.out.println("si es positivo");
             return squareRoot;
         }
         else
         {
+            estado="solo debe ingresar numero positivos";
+            System.out.println("numero negativo");
             return squareRoot * -1;
+
         }
     }
 
-    static Double modulo(Double dividendo, Double divisor){
-        Double resto;
-        Double cociente = 0.0;
-
-        if(divisor <= 0){
-            return 0.0;
+    public double modulo(double num1,double num2) {
+        double residuo = num1%num2;
+        if (residuo > 0 && num1 < 0) {
+            residuo -= num2;
         }
-        else{
-            Double y = dividendo - divisor;
-            resto = dividendo;
-            while (resto >= divisor) {
-                resto -= divisor;
-                ++cociente;
-            }
-            return resto;
+        if (residuo > 0 && num2 < 0) {
+            residuo+=num2;
         }
+        if (residuo < 0 && num1 < 0) {
+            residuo+=num2;
+        }
+        if (residuo < 0 && num2 < 0 && num1 < 0) {
+            residuo-=num2;
+        }
+        return residuo;
     }
 
     public String decimalAHexadecimal(int decimal) {

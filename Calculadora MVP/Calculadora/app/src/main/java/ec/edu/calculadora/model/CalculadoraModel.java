@@ -1,7 +1,7 @@
 package ec.edu.calculadora.model;
 
-import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -13,7 +13,6 @@ import ec.edu.calculadora.interfaces.Calculadora;
  * @author Enso Vera
  * @author Diego Yacelga
  */
-
 public class CalculadoraModel implements Calculadora.Model {
 
     private Operaciones operaciones;
@@ -21,6 +20,7 @@ public class CalculadoraModel implements Calculadora.Model {
     private String clickOpe;
     private Numero numero;
     private Boolean rec;
+    public  String mensaje="";
 
     public CalculadoraModel(Calculadora.Presenter presenter){
         this.presenter=presenter;
@@ -39,6 +39,9 @@ public class CalculadoraModel implements Calculadora.Model {
             calcular();
         }
     }
+
+
+
     /**
      * @param view la vista con la que se va a interactuar
      * @param data Un dato tipo string con el que se identifica el tipo de operacion
@@ -172,6 +175,7 @@ public class CalculadoraModel implements Calculadora.Model {
         switch (number.getId()) {
             case R.id._1:
                 presenter.showDeleteChar(data+1);
+                System.out.println("1");
                 break;
             case R.id._2:
                 presenter.showDeleteChar(data+2);
@@ -210,7 +214,14 @@ public class CalculadoraModel implements Calculadora.Model {
                 break;
             case R.id.btnNeg:
                 if(!data.equals(""))
+                {
                     presenter.showDeleteChar(String.valueOf(Double.parseDouble(data)*-1));
+                    //Double wd1 = new Double(-1);
+                    //wd1=wd1*operaciones.getNumero().getNumero();
+                    //Numero n=new Numero(wd1);
+                    //operaciones.setNumero(n);
+                }
+
                 break;
 
 
@@ -233,6 +244,7 @@ public class CalculadoraModel implements Calculadora.Model {
         presenter.showResult("");
     }
 
+
     private void calcular(){
         if(operaciones.getResultado().getNumero()!=null) {
             switch (this.operaciones.getOperacion()) {
@@ -252,7 +264,8 @@ public class CalculadoraModel implements Calculadora.Model {
                     operaciones.pow();
                     break;
                 case "fact":
-                    operaciones.fact();
+                    //operaciones.fact(mensaje);
+                    presenter.validar(operaciones.fact(mensaje));
                     break;
                 case "%":
                     operaciones.mod();
@@ -261,7 +274,10 @@ public class CalculadoraModel implements Calculadora.Model {
                     operaciones.sen();
                     break;
                 case "sqrt":
-                    operaciones.raiz();
+                    operaciones.raiz(mensaje);
+                   // if(estado!="")
+                       // presenter.validar(mensaje);
+                        presenter.validar("raiz");
                     break;
                 case "cos":
                     operaciones.cos();

@@ -72,4 +72,11 @@ public class CalculadoraPresenter implements Calculadora.Presenter{
             model.clearOperations();
         }
     }
+
+    @Override
+    public void validar(String data) {
+        if(view!=null) {
+            view.validar(data);
+        }
+    }
 }

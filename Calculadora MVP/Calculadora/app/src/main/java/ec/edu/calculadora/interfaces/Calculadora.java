@@ -12,6 +12,7 @@ public interface Calculadora {
         void showResult(String result);
         void showDeleteChar(String result);
         void showOperations(String result);
+        void validar(String data);
     }
 
     interface Presenter{
@@ -23,6 +24,7 @@ public interface Calculadora {
         void showDeleteChar(String result);
         void clearResults();
         void clearOperations();
+        void validar(String data);
     }
 
     interface Model{
