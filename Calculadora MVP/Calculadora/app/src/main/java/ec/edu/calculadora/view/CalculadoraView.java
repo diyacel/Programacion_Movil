@@ -20,7 +20,7 @@ public class CalculadoraView extends AppCompatActivity implements Calculadora.Vi
 
     private Calculadora.Presenter presenter;
     Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0;
-    Button btnDividir, btnSumar, btnRestar, btnMultiplicar,btnElevar,btnRaiz,btnFactorial,btnMod;
+    Button btnDividir, btnSumar, btnRestar, btnMultiplicar,btnElevar,btnRaiz,btnFactorial,btnMod,btnLog;
     Button btnBinario,btnOctal,btnHexadecimal;
     Button btnIgual,btnC,btnAC,btnBorrar,btnPunto,btnSigno;
     Button btnMC,btnMR,btnMas,btnMenos;
@@ -47,6 +47,7 @@ public class CalculadoraView extends AppCompatActivity implements Calculadora.Vi
         btnRestar=(Button) findViewById(R.id.btnRestar);
         btnMultiplicar=(Button) findViewById(R.id.btnMultiplicar);
         btnFactorial=(Button) findViewById(R.id.btnFactorial);
+        btnLog=(Button) findViewById(R.id.btnLog);
         btnMod=(Button) findViewById(R.id.btnMod);
         btnIgual=(Button) findViewById(R.id.btnIgual);
         btnC=(Button) findViewById(R.id.btnC);
@@ -81,6 +82,7 @@ public class CalculadoraView extends AppCompatActivity implements Calculadora.Vi
         btnMultiplicar.setOnClickListener(this);
         btnElevar.setOnClickListener(this);
         btnFactorial.setOnClickListener(this);
+        btnLog.setOnClickListener(this);
         btnBinario.setOnClickListener(this);
         btnOctal.setOnClickListener(this);
         btnHexadecimal.setOnClickListener(this);
@@ -193,6 +195,9 @@ public class CalculadoraView extends AppCompatActivity implements Calculadora.Vi
                 operacion(v);
                 break;
             case R.id.btnFactorial:
+                operacion(v);
+                break;
+            case R.id.btnLog:
                 operacion(v);
                 break;
             case R.id.btnRaiz:

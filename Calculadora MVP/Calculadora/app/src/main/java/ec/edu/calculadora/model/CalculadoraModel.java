@@ -59,7 +59,7 @@ public class CalculadoraModel implements Calculadora.Model {
                 operaciones.setOperacion("*");
                 break;
             case R.id.btnDividir:
-                operaciones.setOperacion("/");
+                operaciones.setOperacion("÷");
                 break;
             case R.id.btnExponencial:
                 operaciones.setOperacion("^");
@@ -74,7 +74,7 @@ public class CalculadoraModel implements Calculadora.Model {
                 operaciones.setOperacion("sen");
                 break;
             case R.id.btnRaiz:
-                operaciones.setOperacion("sqrt");
+                operaciones.setOperacion("√");
                 break;
             case R.id.btnCos:
                 operaciones.setOperacion("cos");
@@ -87,6 +87,9 @@ public class CalculadoraModel implements Calculadora.Model {
                 break;
             case R.id.btnHexadecimal:
                 operaciones.setOperacion("hex");
+                break;
+            case R.id.btnLog:
+                operaciones.setOperacion("Log");
                 break;
 
         }
@@ -257,7 +260,7 @@ public class CalculadoraModel implements Calculadora.Model {
                 case "*":
                     operaciones.multiplicar();
                     break;
-                case "/":
+                case "÷":
                     operaciones.dividir();
                     if(operaciones.mensaje!="")
                         presenter.validar(operaciones.mensaje);
@@ -276,13 +279,18 @@ public class CalculadoraModel implements Calculadora.Model {
                 case "sen":
                     operaciones.sen();
                     break;
-                case "sqrt":
+                case "√":
                     operaciones.raiz();
                     if(operaciones.mensaje!="")
                         presenter.validar(operaciones.mensaje);
                     break;
                 case "cos":
                     operaciones.cos();
+                    break;
+                case "Log":
+                    operaciones.logaritmo();
+                    if(operaciones.mensaje!="")
+                        presenter.validar(operaciones.mensaje);
                     break;
 
             }

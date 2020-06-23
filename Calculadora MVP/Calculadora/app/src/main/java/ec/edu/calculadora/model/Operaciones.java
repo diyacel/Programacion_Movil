@@ -100,6 +100,8 @@ public class Operaciones {
         resultado.setNumero(modulo(resultado.getNumero(),numero.getNumero()));
     }
 
+    public void logaritmo(){resultado.setNumero(log(numero.getNumero()));}
+
 
     public Double exponencial(double a, double b)
     {
@@ -156,15 +158,17 @@ public class Operaciones {
 
     static Double factorial(Double numero) {
         double factorial = 1.0d;
-        mensaje="factorial";
+        //numero=-6.00;
         if(numero<0)
-            //estado="No se debe ingresar numeros negativos";
-            System.out.println("negativo");
-        else
-            //estado="es positivo";
-        System.out.println("positivo");
-        while (numero != 0) {
-            factorial *= numero--;
+        {
+            mensaje="No existe factorial de numeros negativos";
+            return 0.00;
+        }
+        else{
+            System.out.println("positivo");
+            while (numero != 0) {
+                factorial *= numero--;
+            }
         }
 
         return factorial;
@@ -183,7 +187,7 @@ public class Operaciones {
     {
         boolean isPositiveNumber = true;
         Double g1;
-        mensaje="raiz";
+        //number=-25.00;
         if(number==0)
         {
             return 0.0;
@@ -193,6 +197,7 @@ public class Operaciones {
         {
             number=-number;
             isPositiveNumber = false;
+            mensaje="No existe raiz real de números negativos";
         }
 
         Double squareRoot = number/2;
@@ -209,8 +214,7 @@ public class Operaciones {
         }
         else
         {
-            //mensaje="No se debe ingresar numeros negativos";
-            return squareRoot * -1;
+            return 0.00;
 
         }
     }
@@ -279,6 +283,21 @@ public class Operaciones {
             binario="0";
         }
         return binario;
+
+    }
+
+
+    public Double log(double n1)
+    {
+        //n1=-30;
+        if(n1<=0)
+        {
+            mensaje="No se puede calcular el logaritmo de numeros negativos, ni de cero";
+            return 0.00;
+        }
+        else{
+            return Math.log10(n1);
+        }
 
     }
 
