@@ -8,6 +8,7 @@ public class Operaciones {
     private Numero record;
     private String operacion;
     private String operaciones;
+    public static String mensaje="";
 
     public Operaciones() {
         operacion="";
@@ -73,15 +74,14 @@ public class Operaciones {
 
     public void dividir()
     {
-        resultado.setNumero(resultado.getNumero()/numero.getNumero());
+        resultado.setNumero(division(resultado.getNumero(),numero.getNumero()));
     }
 
-    public void raiz(String mensaje){
-       resultado.setNumero(findSquareRoot(resultado.getNumero(),mensaje)) ;   }
+    public void raiz(){
+       resultado.setNumero(findSquareRoot(resultado.getNumero())) ;   }
 
-    public String fact(String mensaje){
-        resultado.setNumero(factorial(resultado.getNumero(),mensaje));
-        return mensaje;
+    public void fact(){
+        resultado.setNumero(factorial(resultado.getNumero()));
     }
 
     public void pow(){
@@ -126,7 +126,18 @@ public class Operaciones {
         return sumatoria;
     }
 
-
+    public Double division(Double n1,Double n2)
+    {
+        if(n2==0)
+        {
+            mensaje="No existe division para 0";
+            return 0.00;
+        }
+        else
+        {
+            return n1/n2;
+        }
+    }
     public Double coseno(Double numero) {
         Double angulo = Math.toRadians(numero);
 
@@ -143,10 +154,9 @@ public class Operaciones {
         return sumatoria;
     }
 
-    static Double factorial(Double numero,String estado) {
+    static Double factorial(Double numero) {
         double factorial = 1.0d;
-        estado="factorial";
-        estado="No se debe ingresar numeros negativos";
+        mensaje="factorial";
         if(numero<0)
             //estado="No se debe ingresar numeros negativos";
             System.out.println("negativo");
@@ -169,10 +179,11 @@ public class Operaciones {
         return factorial;
     }
 
-    public Double findSquareRoot(Double number,String estado)
+    public Double findSquareRoot(Double number)
     {
         boolean isPositiveNumber = true;
         Double g1;
+        mensaje="raiz";
         if(number==0)
         {
             return 0.0;
@@ -194,13 +205,11 @@ public class Operaciones {
 
         if(isPositiveNumber)
         {
-            System.out.println("si es positivo");
             return squareRoot;
         }
         else
         {
-            estado="solo debe ingresar numero positivos";
-            System.out.println("numero negativo");
+            //mensaje="No se debe ingresar numeros negativos";
             return squareRoot * -1;
 
         }

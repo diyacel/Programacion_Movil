@@ -259,13 +259,16 @@ public class CalculadoraModel implements Calculadora.Model {
                     break;
                 case "/":
                     operaciones.dividir();
+                    if(operaciones.mensaje!="")
+                        presenter.validar(operaciones.mensaje);
                     break;
                 case "^":
                     operaciones.pow();
                     break;
                 case "fact":
-                    //operaciones.fact(mensaje);
-                    presenter.validar(operaciones.fact(mensaje));
+                    operaciones.fact();
+                    if(operaciones.mensaje!="")
+                        presenter.validar(operaciones.mensaje);
                     break;
                 case "%":
                     operaciones.mod();
@@ -274,10 +277,9 @@ public class CalculadoraModel implements Calculadora.Model {
                     operaciones.sen();
                     break;
                 case "sqrt":
-                    operaciones.raiz(mensaje);
-                   // if(estado!="")
-                       // presenter.validar(mensaje);
-                        presenter.validar("raiz");
+                    operaciones.raiz();
+                    if(operaciones.mensaje!="")
+                        presenter.validar(operaciones.mensaje);
                     break;
                 case "cos":
                     operaciones.cos();
