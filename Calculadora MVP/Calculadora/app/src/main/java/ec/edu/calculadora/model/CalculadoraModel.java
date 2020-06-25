@@ -222,7 +222,6 @@ public class CalculadoraModel implements Calculadora.Model {
                 }
                 break;
 
-
         }
     }
 

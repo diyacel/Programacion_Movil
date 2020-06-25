@@ -96,6 +96,13 @@
 
 
             <Button
+                android:id="@+id/btnGraficar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Graficar" />
+
+            <Button
                 android:id="@+id/btnFactorial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -1,5 +1,6 @@
 package ec.edu.calculadora.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -24,7 +25,7 @@ public class CalculadoraView extends AppCompatActivity implements Calculadora.Vi
     Button btnBinario,btnOctal,btnHexadecimal;
     Button btnIgual,btnC,btnAC,btnBorrar,btnPunto,btnSigno;
     Button btnMC,btnMR,btnMas,btnMenos;
-    Button btnSeno,btnCoseno;
+    Button btnSeno,btnCoseno,btnGraficar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +67,7 @@ public class CalculadoraView extends AppCompatActivity implements Calculadora.Vi
         btnMenos=(Button) findViewById(R.id.btnMLess);
         btnMR=(Button) findViewById(R.id.btnMR);
         btnMC=(Button) findViewById(R.id.btnMC);
+        btnGraficar=(Button) findViewById(R.id.btnGraficar);
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
         btn3.setOnClickListener(this);
@@ -100,6 +102,7 @@ public class CalculadoraView extends AppCompatActivity implements Calculadora.Vi
         btnBorrar.setOnClickListener(this);
         btnPunto.setOnClickListener(this);
         btnSigno.setOnClickListener(this);
+        btnGraficar.setOnClickListener(this);
     }
 
     public void calcular(View view){
@@ -247,11 +250,12 @@ public class CalculadoraView extends AppCompatActivity implements Calculadora.Vi
             case R.id.btnIgual:
                 calcular(v);
                 break;
-                case R.id.delChar:
+            case R.id.delChar:
                 number(v);
                 break;
-
+            case R.id.btnGraficar:
+                startActivity(new Intent(CalculadoraView.this,GraphicDisplay.class));
+                break;
         }
-
     }
 }
