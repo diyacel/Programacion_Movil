@@ -9,22 +9,25 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import ec.edu.calculadora.R;
+import ec.edu.calculadora.interfaces.Calculadora;
+import ec.edu.calculadora.presenter.CalculadoraPresenter;
 
-public class GraphicDisplay extends AppCompatActivity {
+public class GraphicDisplay extends AppCompatActivity implements Calculadora.Graphics {
 
     private LineGraphSeries<DataPoint> series;
     private GraphView function;
     private static int valor;
-
+    private Calculadora.Presenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graphic_display);
-
-        double x, y;
-        x = -50;
-
         function = findViewById(R.id.vistaFuncion);
+        presenter = new CalculadoraPresenter(this);
+       /* String grados=getIntent().getStringExtra("grados");
+        double x, y;
+        x = 0;
+
 
         function.getViewport().setScrollable(true);
         function.getViewport().setScrollableY(true);
@@ -33,20 +36,26 @@ public class GraphicDisplay extends AppCompatActivity {
         function.getViewport().setScalableY(true);
 
         function.getViewport().setXAxisBoundsManual(true);
-        function.getViewport().setMinX(-50);
-        function.getViewport().setMaxX(50);
+        function.getViewport().setMinX(-2*Math.PI);
+        function.getViewport().setMaxX(2*Math.PI);
+        function.getViewport().setMaxY(1);
+        function.getViewport().setMaxY(-1);
+        series = new LineGraphSeries<DataPoint>();*/
 
-        series = new LineGraphSeries<DataPoint>();
+       /* for(double i=0.01; i<Math.toRadians(90);i+=0.01){
 
-        for(int i=0; i<500;i++){
-            x+=0.1;
-            y=f(x);
-            series.appendData(new DataPoint(x,y),true,500);
-        }
+            y=seno(x);
+            x+=0.01;
+            series.appendData(new DataPoint(x,y),true,1000);
+        }*/
+
     }
 
-    public double f(double x){
-        double f2 = (1*(Math.pow(x,3))) + (0*(Math.pow(x,2))) + (-3*x) + 1;
-        return f2;
+
+
+    @Override
+    public void graficar(GraphView grafico) {
+        function=grafico;
+
     }
 }

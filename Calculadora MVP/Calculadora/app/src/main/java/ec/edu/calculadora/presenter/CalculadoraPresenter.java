@@ -2,19 +2,29 @@ package ec.edu.calculadora.presenter;
 
 import android.view.View;
 
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
 import ec.edu.calculadora.interfaces.Calculadora;
 import ec.edu.calculadora.model.CalculadoraModel;
-
+import ec.edu.calculadora.view.GraphicDisplay;
 
 
 public class CalculadoraPresenter implements Calculadora.Presenter{
 
     private Calculadora.View view;
     private Calculadora.Model model;
+    private Calculadora.Graphics graphics;
 
     public CalculadoraPresenter(Calculadora.View view){
         this.view = view;
         model = new CalculadoraModel(this);
+
+    }
+
+    public CalculadoraPresenter(Calculadora.Graphics graphics) {
+        this.graphics = graphics;
     }
 
     @Override
@@ -77,6 +87,13 @@ public class CalculadoraPresenter implements Calculadora.Presenter{
     public void validar(String data) {
         if(view!=null) {
             view.validar(data);
+        }
+    }
+
+    @Override
+    public void graficar(GraphView grafico) {
+        if(view!=null) {
+            graphics.graficar(grafico);
         }
     }
 }

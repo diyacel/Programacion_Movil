@@ -1,6 +1,13 @@
 package ec.edu.calculadora.model;
 
+import android.view.View;
 import android.widget.Toast;
+
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
+import ec.edu.calculadora.R;
 
 public class Operaciones {
     private Numero resultado;
@@ -89,11 +96,11 @@ public class Operaciones {
     }
 
     public void sen(){
-        resultado.setNumero(seno(resultado.getNumero()));
+        resultado.setNumero(seno(Math.toRadians(resultado.getNumero())));
     }
 
     public void cos(){
-        resultado.setNumero(coseno(resultado.getNumero()));
+        resultado.setNumero(coseno(Math.toRadians(resultado.getNumero())));
     }
 
     public void mod(){
@@ -113,8 +120,8 @@ public class Operaciones {
         return power;
     }
 
-    public Double seno(Double numero) {
-        double angulo = Math.toRadians(numero);
+    public Double seno(Double angulo) {
+        //double angulo = Math.toRadians(numero);
 
         double sumando, sumatoria = 0, precision = 0.00001d;
         double parteEntera=0,parteDecimal=0;
@@ -141,8 +148,8 @@ public class Operaciones {
             return n1/n2;
         }
     }
-    public Double coseno(Double numero) {
-        Double angulo = Math.toRadians(numero);
+    public Double coseno(Double angulo) {
+       // Double angulo = Math.toRadians(numero);
 
         Double sumando, sumatoria = 0.0, precision = 0.000001d;
 
@@ -300,6 +307,40 @@ public class Operaciones {
             return Math.log10(n1);
         }
 
+    }
+
+    public GraphView graficar(View view)
+    {
+        double x, y,number;
+        x = 0;
+        number=Math.toRadians(resultado.getNumero());
+        LineGraphSeries<DataPoint> series;
+        GraphView function;
+
+        function = view.findViewById(R.id.vistaFuncion2);
+        function.getViewport().setScrollable(true);
+        function.getViewport().setScrollableY(true);
+
+        function.getViewport().setScalable(false);
+        function.getViewport().setScalableY(true);
+
+        function.getViewport().setXAxisBoundsManual(true);
+        function.getViewport().setMinX(Math.abs(number)*-1);
+        function.getViewport().setMaxX(Math.abs(number));
+        function.getViewport().setMaxY(1);
+        function.getViewport().setMaxY(-1);
+        series = new LineGraphSeries<DataPoint>();
+
+        for(double i=0.01; i<number;i+=0.01){
+            if(operacion.equals("sen"))
+                y=seno(x);
+            else
+                y=coseno(x);
+            x+=0.01;
+            series.appendData(new DataPoint(x,y),true,1000);
+        }
+        function.addSeries(series);
+        return function;
     }
 
 }

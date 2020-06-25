@@ -21,9 +21,7 @@ public class CalculadoraModel implements Calculadora.Model {
     private Numero numero;
     private Boolean rec;
     public  String mensaje="";
-    public boolean converBin=false;
-    public boolean converOct=false;
-    public boolean converHex=false;
+
 
     public CalculadoraModel(Calculadora.Presenter presenter){
         this.presenter=presenter;
@@ -224,6 +222,13 @@ public class CalculadoraModel implements Calculadora.Model {
                     presenter.showDeleteChar(String.valueOf(Double.parseDouble(data)*-1));
                 }
                 break;
+            case R.id.btnGraficar:
+                if(operaciones.getOperacion().equals("sen")|| operaciones.getOperacion().equals("cos"))
+                {
+                    presenter.graficar(operaciones.graficar(number));
+                }
+                break;
+
 
         }
     }
