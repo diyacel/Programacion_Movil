@@ -100,7 +100,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Graficar" />
+                android:text="Graficar"
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/btnFactorial"
@@ -363,11 +364,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/vistaFuncion2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

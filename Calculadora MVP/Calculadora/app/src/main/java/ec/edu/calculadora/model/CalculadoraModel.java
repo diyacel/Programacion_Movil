@@ -1,13 +1,20 @@
 package ec.edu.calculadora.model;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Toast;
+
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import ec.edu.calculadora.R;
 import ec.edu.calculadora.interfaces.Calculadora;
+import ec.edu.calculadora.view.CalculadoraView;
+import ec.edu.calculadora.view.GraphicDisplay;
 
 /**
  * @author Enso Vera
@@ -21,6 +28,7 @@ public class CalculadoraModel implements Calculadora.Model {
     private Numero numero;
     private Boolean rec;
     public  String mensaje="";
+    Intent intent;
 
 
     public CalculadoraModel(Calculadora.Presenter presenter){
@@ -223,13 +231,13 @@ public class CalculadoraModel implements Calculadora.Model {
                 }
                 break;
             case R.id.btnGraficar:
-                if(operaciones.getOperacion().equals("sen")|| operaciones.getOperacion().equals("cos"))
-                {
-                    presenter.graficar(operaciones.graficar(number));
+                if((operaciones.getOperacion().equals("sen")||operaciones.getOperacion().equals("cos")) && operaciones.getNumero()!=null){
+                    intent=new Intent(number.getContext(), GraphicDisplay.class);
+                    intent.putExtra("grados",operaciones.getNumero().getNumero().toString());
+                    intent.putExtra("ope",operaciones.getOperacion());
+                    number.getContext().startActivity(intent);
                 }
                 break;
-
-
         }
     }
 
@@ -248,7 +256,6 @@ public class CalculadoraModel implements Calculadora.Model {
         presenter.showOperations("");
         presenter.showResult("");
     }
-
 
     private void calcular(){
         if(operaciones.getResultado().getNumero()!=null)

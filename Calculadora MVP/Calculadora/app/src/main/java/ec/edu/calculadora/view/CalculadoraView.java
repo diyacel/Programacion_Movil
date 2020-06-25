@@ -21,7 +21,6 @@ public class CalculadoraView extends AppCompatActivity implements Calculadora.Vi
 
     private TextView operaciones;
     private TextView numero;
-    Intent intent;
     private Calculadora.Presenter presenter;
     Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0;
     Button btnDividir, btnSumar, btnRestar, btnMultiplicar,btnElevar,btnRaiz,btnFactorial,btnMod,btnLog;
@@ -148,14 +147,6 @@ public class CalculadoraView extends AppCompatActivity implements Calculadora.Vi
         toast.setGravity(Gravity.CENTER,0,0);
         toast.show();
     }
-/*
-    @Override
-    public void graficar(LineGraphSeries<DataPoint> series) {
-        intent=new Intent(CalculadoraView.this,GraphicDisplay.class);
-        intent.putExtra("grados",series);
-        intent.put
-        startActivity(intent);
-    }*/
 
     @Override
     public void onClick(View v)

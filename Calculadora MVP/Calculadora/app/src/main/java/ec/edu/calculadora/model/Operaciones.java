@@ -309,15 +309,14 @@ public class Operaciones {
 
     }
 
-    public GraphView graficar(View view)
+    public LineGraphSeries<DataPoint> graficar(GraphView function, String grados, String ope)
     {
         double x, y,number;
         x = 0;
-        number=Math.toRadians(resultado.getNumero());
+        y = 0;
+        number=Math.toRadians(Double.parseDouble(grados));
         LineGraphSeries<DataPoint> series;
-        GraphView function;
 
-        function = view.findViewById(R.id.vistaFuncion2);
         function.getViewport().setScrollable(true);
         function.getViewport().setScrollableY(true);
 
@@ -325,22 +324,22 @@ public class Operaciones {
         function.getViewport().setScalableY(true);
 
         function.getViewport().setXAxisBoundsManual(true);
-        function.getViewport().setMinX(Math.abs(number)*-1);
-        function.getViewport().setMaxX(Math.abs(number));
-        function.getViewport().setMaxY(1);
-        function.getViewport().setMaxY(-1);
+        function.getViewport().setMinX(-1);
+        function.getViewport().setMaxX(Math.abs(number)+2);
+        function.getViewport().setMaxY(2);
+        function.getViewport().setMaxY(-2);
         series = new LineGraphSeries<DataPoint>();
 
         for(double i=0.01; i<number;i+=0.01){
-            if(operacion.equals("sen"))
-                y=seno(x);
-            else
-                y=coseno(x);
+            if(ope.equals("sen")) {
+                y = seno(x);
+            }
+            if(ope.equals("cos")) {
+                y = coseno(x);
+            }
             x+=0.01;
             series.appendData(new DataPoint(x,y),true,1000);
         }
-        function.addSeries(series);
-        return function;
+        return series;
     }
-
 }

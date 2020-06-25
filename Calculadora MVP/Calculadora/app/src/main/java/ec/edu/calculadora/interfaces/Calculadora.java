@@ -29,7 +29,6 @@ public interface Calculadora {
         void clearResults();
         void clearOperations();
         void validar(String data);
-        void graficar(GraphView grafico);
     }
 
     interface Model{
@@ -40,7 +39,4 @@ public interface Calculadora {
         void clearOperations();
     }
 
-    interface Graphics{
-        void graficar(GraphView grafico);
-    }
 }
