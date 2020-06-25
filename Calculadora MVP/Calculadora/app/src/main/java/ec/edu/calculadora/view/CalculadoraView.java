@@ -1,22 +1,24 @@
 package ec.edu.calculadora.view;
 
-import android.content.Intent;
+/**
+ * @author Eduardo Vera
+ * @author Diego Yacelga
+ */
+
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
-
 import ec.edu.calculadora.R;
 import ec.edu.calculadora.interfaces.Calculadora;
 import ec.edu.calculadora.presenter.CalculadoraPresenter;
 
+/**
+ * Clase que contiene los componentes y eventos de la vista y que se comunica con el presentador
+ */
 public class CalculadoraView extends AppCompatActivity implements Calculadora.View, View.OnClickListener{
 
     private TextView operaciones;
@@ -28,6 +30,11 @@ public class CalculadoraView extends AppCompatActivity implements Calculadora.Vi
     Button btnIgual,btnC,btnAC,btnBorrar,btnPunto,btnSigno;
     Button btnMC,btnMR,btnMas,btnMenos;
     Button btnSeno,btnCoseno,btnGraficar;
+
+    /**
+     * Método que crea la actividad de la calculadora
+     * @param savedInstanceState     Guarda el estado de la Actividad.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,40 +114,75 @@ public class CalculadoraView extends AppCompatActivity implements Calculadora.Vi
         btnGraficar.setOnClickListener(this);
     }
 
+    /**
+     * Método que llama a la funcion del presentador que llama a la funcion del modelo que realiza las operaciones de calculo
+     * @param view      Contiene la vista con los componentes de la calculadora
+     */
     public void calcular(View view){
         presenter.calculadora(numero.getText().toString());
     }
 
+    /**
+     * Método que llama a la funcion del presentador que llama a la funcion del modelo que setea la operacion a realizar
+     * @param view      Contiene la vista con los componentes de la calculadora
+     */
     public void operacion(View view){ presenter.operacion(view, numero.getText().toString()); }
 
+    /**
+     * Método que llama a la funcion del presentador que llama a la funcion del modelo que setea los numeros ingresados
+     * @param view      Contiene la vista con los componentes de la calculadora
+     */
     public void number(View view){
         presenter.setNumber(view, numero.getText().toString());
     }
 
+    /**
+     * Método que llama a la funcion del presentador que llama a la funcion del modelo que limpia los resultados
+     * @param view      Contiene la vista con los componentes de la calculadora
+     */
     public void clearResults(View view){
         presenter.clearResults();
     }
 
+    /**
+     * Método que llama a la funcion del presentador que llama al a funcion del modelo que limpia la pantalla
+     * @param view      Contiene la vista con los componentes de la calculadora
+     */
     public void clearOperations(View view){
         presenter.clearOperations();
     }
 
+    /**
+     * Método que muestra en pantalla del resultado de una operacion realizado en el model
+     * @param result       Contiene el resultado de la operacion
+     */
     @Override
     public void showResult(String result) {
         numero.setText(result);
     }
 
+    /**
+     * Método que muestra en pantalla la eliminacion de un caracter de los numeros ingresados
+     * @param result       Contiene los numeros ingresados menos el caracter borrado
+     */
     @Override
     public void showDeleteChar(String result) {
-
         numero.setText(result);
     }
 
+    /**
+     * Método que muestra en pantalla el historial de operaciones realizadas en el model
+     * @param operations       Contiene el historial de operaciones realizadas
+     */
     @Override
     public void showOperations(String operations) {
         operaciones.setText(operations);
     }
 
+    /**
+     * Método que muestra en pantalla los mensajes de validacion realizados en el model
+     * @param data      Contiene el mensaje de validacion a mostrar
+     */
     @Override
     public void validar(String data) {
         Toast toast=Toast.makeText(getBaseContext(),data,Toast.LENGTH_LONG);
@@ -148,6 +190,10 @@ public class CalculadoraView extends AppCompatActivity implements Calculadora.Vi
         toast.show();
     }
 
+    /**
+     * Método que escucha los click de cada boton de la calculadora y se comunica con el presentador
+     * @param v     Contiene la vista con los componentes de la calculadora
+     */
     @Override
     public void onClick(View v)
     {

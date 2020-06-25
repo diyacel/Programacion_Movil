@@ -2,23 +2,18 @@ package ec.edu.calculadora.model;
 
 import android.content.Intent;
 import android.view.View;
-import android.widget.Toast;
-
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 import ec.edu.calculadora.R;
 import ec.edu.calculadora.interfaces.Calculadora;
-import ec.edu.calculadora.view.CalculadoraView;
 import ec.edu.calculadora.view.GraphicDisplay;
 
 /**
- * @author Enso Vera
+ * @author Eduardo Vera
  * @author Diego Yacelga
+ */
+
+/**
+ * Clase que recibe las peticiones de la vista e invoca los metodos de las operaciones
  */
 public class CalculadoraModel implements Calculadora.Model {
 
@@ -30,7 +25,10 @@ public class CalculadoraModel implements Calculadora.Model {
     public  String mensaje="";
     Intent intent;
 
-
+    /**
+     * Método constructor del Model
+     * @param presenter     Recibe el parametro de tipo Presenter
+     */
     public CalculadoraModel(Calculadora.Presenter presenter){
         this.presenter=presenter;
         this.operaciones = new Operaciones();
@@ -39,6 +37,10 @@ public class CalculadoraModel implements Calculadora.Model {
         this.rec = false;
     }
 
+    /**
+     * Método que invoca el método que calcula cuando se selecciona el boton igual
+     * @param data      Contiene el valor ingresado en la vista
+     */
     @Override
     public void calculadora(String data) {
         this.numero = new Numero();
@@ -49,9 +51,8 @@ public class CalculadoraModel implements Calculadora.Model {
         }
     }
 
-
-
     /**
+     * Método que setea la operacion seleccionada
      * @param view la vista con la que se va a interactuar
      * @param data Un dato tipo string con el que se identifica el tipo de operacion
      */
@@ -106,6 +107,10 @@ public class CalculadoraModel implements Calculadora.Model {
         OperacionesShow(data);
     }
 
+    /**
+     * Método administra el historial de operaciones realizadas
+     * @param data
+     */
     public void OperacionesShow(String data){
         if(operaciones.getResultado()==null){
             if(!operaciones.getOperacion().equals("sen")&&!operaciones.getOperacion().equals("sqrt")&&!operaciones.getOperacion().equals("fact")&&!operaciones.getOperacion().equals("cos")&&!operaciones.getOperacion().equals("Log")) {
@@ -133,6 +138,11 @@ public class CalculadoraModel implements Calculadora.Model {
         presenter.showOperations(operaciones.getOperaciones());
     }
 
+    /**
+     * Método que concatena los núeros ingresados en pantalla
+     * @param number      Contiene la vista de la calculadora identificar el numero seleccionada
+     * @param data        Contiene el valor de los datos ingresados
+     */
     @Override
         public void setNumber(View number, String data) {
 
@@ -241,6 +251,9 @@ public class CalculadoraModel implements Calculadora.Model {
         }
     }
 
+    /**
+     * Método que limpia el resultado  y resetea los valores a null
+     */
     @Override
     public void clearResults() {
         operaciones.setResultado(null);
@@ -248,6 +261,9 @@ public class CalculadoraModel implements Calculadora.Model {
         presenter.showResult("");
     }
 
+    /**
+     * Método que limpia el resultado, el historial de operaciones y resetea los valores a null
+     */
     @Override
     public void clearOperations() {
         operaciones.setNumero(null);
@@ -257,6 +273,9 @@ public class CalculadoraModel implements Calculadora.Model {
         presenter.showResult("");
     }
 
+    /**
+     * Método que invoca los métodos segun la operacion seleccionada en pantalla
+     */
     private void calcular(){
         if(operaciones.getResultado().getNumero()!=null)
         {
@@ -305,8 +324,8 @@ public class CalculadoraModel implements Calculadora.Model {
                     break;
 
             }
-            BigDecimal formatNumber = new BigDecimal(operaciones.getResultado().getNumero());
-            formatNumber = formatNumber.setScale(2, RoundingMode.DOWN);
+            //BigDecimal formatNumber = new BigDecimal(operaciones.getResultado().getNumero());
+            //formatNumber = formatNumber.setScale(2, RoundingMode.DOWN);
             presenter.showResult(operaciones.getResultado().getNumero().toString());
 
             clickOpe = "S";

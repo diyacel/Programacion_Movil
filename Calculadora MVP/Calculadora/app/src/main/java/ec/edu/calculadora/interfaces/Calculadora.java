@@ -1,17 +1,18 @@
 package ec.edu.calculadora.interfaces;
 
-import android.view.View;
-
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
-
 /**
- * Created by albertopalomarrobledo on 7/7/17.
+ * @author Eduardo Vera
+ * @author Diego Yacelga
  */
 
+/**
+ * Interfaces que contienen las funciones que permite la comunicacion de la vista con el modelo
+ */
 public interface Calculadora {
 
+    /**
+     * Contiene las funciones que van a ser implementadas en la vista
+     */
     interface View{
         void showResult(String result);
         void showDeleteChar(String result);
@@ -19,6 +20,9 @@ public interface Calculadora {
         void validar(String data);
     }
 
+    /**
+     * Contiene las funciones que van a ser implementadas en el presentador
+     */
     interface Presenter{
         void showResult(String result);
         void calculadora(String data);
@@ -31,6 +35,9 @@ public interface Calculadora {
         void validar(String data);
     }
 
+    /**
+     * Contiene las funciones que van a ser implementadas en el modelo
+     */
     interface Model{
         void calculadora(String data);
         void operacion(android.view.View operacion, String data);

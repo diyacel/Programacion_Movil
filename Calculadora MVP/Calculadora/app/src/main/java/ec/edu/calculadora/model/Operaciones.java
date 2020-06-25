@@ -1,14 +1,17 @@
 package ec.edu.calculadora.model;
 
-import android.view.View;
-import android.widget.Toast;
+/**
+ * @author Eduardo Vera
+ * @author Diego Yacelga
+ */
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
-import ec.edu.calculadora.R;
-
+/**
+ * Clase que contiene los metodos para realizar las operaciones de la calculadora
+ */
 public class Operaciones {
     private Numero resultado;
     private Numero numero;
@@ -17,6 +20,9 @@ public class Operaciones {
     private String operaciones;
     public static String mensaje="";
 
+    /**
+     * Método constructor de Operaciones
+     */
     public Operaciones() {
         operacion="";
         operaciones = "";
@@ -24,93 +30,173 @@ public class Operaciones {
         record.setNumero(0.0);
     }
 
+    /**
+     * Método que recupera el numero ingresado en pantalla
+     * @return      Devuelve el valor ingresado en pantalla
+     */
     public Numero getNumero() {
         return numero;
     }
 
+    /**
+     * Método que setea el numero ingresado en pantalla
+     * @param numero       Contiene el valor ingresado en pantalla
+     */
     public void setNumero(Numero numero) {
         this.numero = numero;
     }
 
+    /**
+     * Método que devuelve el resultado obtenido en las operaciones
+     * @return      Devuelve resultado obtenido en las operaciones
+     */
     public Numero getResultado() {
         return resultado;
     }
 
+    /**
+     * Método que setea el resultado obtenido de las operaciones
+     * @param resultado     Contiene el resultado obtenido en las operaciones
+     */
     public void setResultado(Numero resultado) {
         this.resultado = resultado;
     }
 
+    /**
+     * Método que devuelve la operacion selecciona en la vista
+     * @return     Devuelve la operacion seleccionada
+     */
     public String getOperacion() {
         return operacion;
     }
 
-    public Numero getRecord() {
-        return record;
-    }
-
-    public void setRecord(Numero record) {
-        this.record = record;
-    }
-
+    /**
+     * Método que setea la operacion selecciona en la vista
+     * @param operacion     Contiene la operacion selecciona en la vista
+     */
     public void setOperacion(String operacion) {
         this.operacion = operacion;
     }
 
+    /**
+     * Método que devuelve el valor de la memoria
+     * @return      Devuelve el valor de la memoria
+     */
+    public Numero getRecord() {
+        return record;
+    }
+
+    /**
+     * Método que setea el valor de la memoria
+     * @param record      Contiene el valor a guardar en la memoria
+     */
+    public void setRecord(Numero record) {
+        this.record = record;
+    }
+
+    /**
+     * Método que devuelve el historial de operaciones
+     * @return      Devuelve el historial de operaciones
+     */
     public String getOperaciones() {
         return operaciones;
     }
 
+    /**
+     * Método que devuelve el historial de operaciones
+     * @param operaciones       ontiene el historial de operaciones
+     */
     public void setOperaciones(String operaciones) {
         this.operaciones = operaciones;
     }
 
+    /**
+     * Método llamada por el modelo que invoca al metodo que calcula la suma
+     */
     public void sumar()
     {
         resultado.setNumero(resultado.getNumero()+numero.getNumero());
     }
 
+    /**
+     * Método llamada por el modelo que invoca al metodo que calcula la resta
+     */
     public void restar()
     {
         resultado.setNumero(resultado.getNumero()-numero.getNumero());
     }
 
+    /**
+     * Método llamada por el modelo que invoca al metodo que calcula la multiplicacion
+     */
     public void multiplicar()
     {
         resultado.setNumero(resultado.getNumero()*numero.getNumero());
     }
 
+    /**
+     * Método llamada por el modelo que invoca al metodo que calcula la division
+     */
     public void dividir()
     {
         resultado.setNumero(division(resultado.getNumero(),numero.getNumero()));
     }
 
+    /**
+     * Método llamada por el modelo que invoca al metodo que calcula la raiz
+     */
     public void raiz(){
-       resultado.setNumero(findSquareRoot(resultado.getNumero())) ;   }
+       resultado.setNumero(findSquareRoot(resultado.getNumero())) ;
+    }
 
+    /**
+     * Método llamada por el modelo que invoca al metodo que calcula el factorial
+     */
     public void fact(){
         resultado.setNumero(factorial(resultado.getNumero()));
     }
 
+    /**
+     * Método llamada por el modelo que invoca al metodo que calcula el exponencial
+     */
     public void pow(){
         resultado.setNumero(exponencial(resultado.getNumero(),numero.getNumero()));
     }
 
+    /**
+     * Método llamada por el modelo que invoca al metodo que calcula el seno
+     */
     public void sen(){
         resultado.setNumero(seno(Math.toRadians(resultado.getNumero())));
     }
 
+    /**
+     * Método llamada por el modelo que invoca al metodo que calcula el coseno
+     */
     public void cos(){
         resultado.setNumero(coseno(Math.toRadians(resultado.getNumero())));
     }
 
+    /**
+     * Método llamada por el modelo que invoca al metodo que calcula el modulo
+     */
     public void mod(){
         resultado.setNumero(modulo(resultado.getNumero(),numero.getNumero()));
     }
 
+    /**
+     * Método llamada por el modelo que invoca al metodo que calcula el logaritmo
+     */
     public void logaritmo(){
-        System.out.println("logaritmo");resultado.setNumero(log(numero.getNumero()));}
+        resultado.setNumero(log(numero.getNumero()));
+    }
 
-
+    /**
+     * Método que calcula el exponencial
+     * @param a     Valor que contiene el numero ingresado base
+     * @param b     Valor que contiene el numero ingresado exponente
+     * @return
+     */
     public Double exponencial(double a, double b)
     {
         double power = 1;
@@ -120,6 +206,11 @@ public class Operaciones {
         return power;
     }
 
+    /**
+     * Método que calcula el seno
+     * @param angulo    Valor que contiene el numero ingresado
+     * @return
+     */
     public Double seno(Double angulo) {
         //double angulo = Math.toRadians(numero);
 
@@ -136,6 +227,12 @@ public class Operaciones {
         return sumatoria;
     }
 
+    /**
+     * Método que obtiene la division de dos numeros
+     * @param n1    Valor que contiene el numero ingresado del dividendo
+     * @param n2    Valor que contiene el numero ingresado del divisor
+     * @return
+     */
     public Double division(Double n1,Double n2)
     {
         if(n2==0)
@@ -148,6 +245,12 @@ public class Operaciones {
             return n1/n2;
         }
     }
+
+    /**
+     * Método que calcula el coseno
+     * @param angulo      Valor que contiene el numero ingresado
+     * @return
+     */
     public Double coseno(Double angulo) {
        // Double angulo = Math.toRadians(numero);
 
@@ -164,6 +267,11 @@ public class Operaciones {
         return sumatoria;
     }
 
+    /**
+     * Método que calcula el factorial de un numero
+     * @param numero    Valor que contiene el numero ingresado
+     * @return
+     */
     static Double factorial(Double numero) {
         double factorial = 1.0d;
         //numero=-6.00;
@@ -181,6 +289,12 @@ public class Operaciones {
 
         return factorial;
     }
+
+    /**
+     * Método que calcula el factorial de un numero
+     * @param numero    Valor que contiene el numero ingresado
+     * @return
+     */
     static double factorial2(double numero) {
         double factorial = 1.0d;
 
@@ -191,6 +305,11 @@ public class Operaciones {
         return factorial;
     }
 
+    /**
+     * Método que calcula la raiz cuadrada de un numero
+     * @param number    Valor que contiene el numero ingresado
+     * @return
+     */
     public Double findSquareRoot(Double number)
     {
         boolean isPositiveNumber = true;
@@ -227,6 +346,12 @@ public class Operaciones {
         }
     }
 
+    /**
+     * Método que obtiene el modulo de una division
+     * @param num1      Valor que contiene el numero del dividendo
+     * @param num2      Valor que contiene el numero del divisor
+     * @return
+     */
     public double modulo(double num1,double num2) {
         double residuo = num1%num2;
         if (residuo > 0 && num1 < 0) {
@@ -244,6 +369,11 @@ public class Operaciones {
         return residuo;
     }
 
+    /**
+     * Método que convierte un decimal a Hexadecimal
+     * @param decimal       Valor que contiene el numero ingresado
+     * @return
+     */
     public String decimalAHexadecimal(int decimal) {
         String hexadecimal = "";
         String caracteresHexadecimales = "0123456789ABCDEF";
@@ -255,6 +385,11 @@ public class Operaciones {
         return hexadecimal;
     }
 
+    /**
+     * Método que convierte un decimal a octal
+     * @param decimal       Valor que contiene el numero ingresado
+     * @return
+     */
     public String decimalAOctal(int decimal) {
         String octal = "";// Almacenamos el número octal que será el resultado
         String caracteresOctales = "01234567";
@@ -270,6 +405,11 @@ public class Operaciones {
         return octal;
     }
 
+    /**
+     * Método que convierte un numero decimal a binario
+     * @param numero      Valor que contiene el numero ingresado
+     * @return
+     */
     public String decimalABinario(int numero)
     {
         String binario="";
@@ -294,7 +434,11 @@ public class Operaciones {
 
     }
 
-
+    /**
+     * Método que calcula el logaritmo natural
+     * @param n1      Valor que contiene el numero ingresado
+     * @return
+     */
     public Double log(double n1)
     {
         //n1=-30;
@@ -309,6 +453,13 @@ public class Operaciones {
 
     }
 
+    /**
+     * Método que calcula los puntos que x,y que van a ser graficados
+     * @param function      Componente que dibuja en pantalla el grafico
+     * @param grados        Valor que contiene los grados ingresados
+     * @param ope           Contiene la operacion selecciona
+     * @return
+     */
     public LineGraphSeries<DataPoint> graficar(GraphView function, String grados, String ope)
     {
         double x, y,number;
