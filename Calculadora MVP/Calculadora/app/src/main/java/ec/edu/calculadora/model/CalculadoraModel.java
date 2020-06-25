@@ -21,6 +21,9 @@ public class CalculadoraModel implements Calculadora.Model {
     private Numero numero;
     private Boolean rec;
     public  String mensaje="";
+    public boolean converBin=false;
+    public boolean converOct=false;
+    public boolean converHex=false;
 
     public CalculadoraModel(Calculadora.Presenter presenter){
         this.presenter=presenter;
@@ -89,7 +92,7 @@ public class CalculadoraModel implements Calculadora.Model {
                 operaciones.setOperacion("hex");
                 break;
             case R.id.btnLog:
-                operaciones.setOperacion("log");
+                operaciones.setOperacion("Log");
                 break;
 
         }
@@ -99,7 +102,7 @@ public class CalculadoraModel implements Calculadora.Model {
 
     public void OperacionesShow(String data){
         if(operaciones.getResultado()==null){
-            if(!operaciones.getOperacion().equals("sen")&&!operaciones.getOperacion().equals("sqrt")&&!operaciones.getOperacion().equals("fact")&&!operaciones.getOperacion().equals("cos")&&!operaciones.getOperacion().equals("log")) {
+            if(!operaciones.getOperacion().equals("sen")&&!operaciones.getOperacion().equals("sqrt")&&!operaciones.getOperacion().equals("fact")&&!operaciones.getOperacion().equals("cos")&&!operaciones.getOperacion().equals("Log")) {
                 operaciones.setOperaciones(operaciones.getOperaciones() + " " + Double.parseDouble(data) + " " + operaciones.getOperacion());
             }else{
                 operaciones.setOperaciones(operaciones.getOperaciones() + " " + operaciones.getOperacion());
@@ -112,7 +115,7 @@ public class CalculadoraModel implements Calculadora.Model {
                 clickOpe = "S";
                 rec = false;
             }
-            if(!operaciones.getOperacion().equals("sen")&&!operaciones.getOperacion().equals("sqrt")&&!operaciones.getOperacion().equals("fact")&&!operaciones.getOperacion().equals("cos")&&!operaciones.getOperacion().equals("log")) {
+            if(!operaciones.getOperacion().equals("sen")&&!operaciones.getOperacion().equals("sqrt")&&!operaciones.getOperacion().equals("fact")&&!operaciones.getOperacion().equals("cos")&&!operaciones.getOperacion().equals("Log")) {
                 String operaciones = this.operaciones.getOperaciones();
                 operaciones = operaciones.substring(0,operaciones.length()-1);
                 this.operaciones.setOperaciones(operaciones+ this.operaciones.getOperacion());
@@ -159,9 +162,9 @@ public class CalculadoraModel implements Calculadora.Model {
                 }
                 break;
             case R.id.btnBinario:
-                presenter.showResult(operaciones.decimalABinario(Integer.parseInt(data)));
-                System.out.println("resultado: "+operaciones.decimalABinario((Integer.parseInt(data))));
-                break;
+                    presenter.showResult(operaciones.decimalABinario(Integer.parseInt(data)));
+                    System.out.println("resultado: "+operaciones.decimalABinario((Integer.parseInt(data))));
+                     break;
             case R.id.btnOctal:
                 presenter.showResult(operaciones.decimalAOctal(Integer.parseInt(data)));
                 break;
@@ -244,7 +247,9 @@ public class CalculadoraModel implements Calculadora.Model {
 
 
     private void calcular(){
-        if(operaciones.getResultado().getNumero()!=null) {
+        if(operaciones.getResultado().getNumero()!=null)
+        {
+            operaciones.mensaje="";
             switch (this.operaciones.getOperacion()) {
                 case "+":
                     operaciones.sumar();
