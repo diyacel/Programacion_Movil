@@ -100,7 +100,8 @@ public class Operaciones {
         resultado.setNumero(modulo(resultado.getNumero(),numero.getNumero()));
     }
 
-    public void logaritmo(){resultado.setNumero(log(numero.getNumero()));}
+    public void logaritmo(){
+        System.out.println("logaritmo");resultado.setNumero(log(numero.getNumero()));}
 
 
     public Double exponencial(double a, double b)
