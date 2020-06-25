@@ -489,7 +489,7 @@ public class Operaciones {
                 y = coseno(x);
             }
             x+=0.01;
-            series.appendData(new DataPoint(x,y),true,1000);
+            series.appendData(new DataPoint(x,y),true,5000);
         }
         return series;
     }
