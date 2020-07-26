@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "172142024309",
+    "firebase_url": "https://chat-ab800.firebaseio.com",
+    "project_id": "chat-ab800",
+    "storage_bucket": "chat-ab800.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172142024309:android:38c5c45d92a0f5ed1e4a3c",
+        "android_client_info": {
+          "package_name": "ec.com.chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172142024309-jm2bju79gli9br8d0866c6dhm7viji6p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNZMIGDHaabPGIlZeECaVFzwwRR_QpAhU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "172142024309-jm2bju79gli9br8d0866c6dhm7viji6p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172142024309:android:e1f01b7fcab85e501e4a3c",
+        "android_client_info": {
+          "package_name": "ec.edu.chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172142024309-aaps0kec3lfdblqnh2ap0dumfkgipe9l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ec.edu.chat",
+            "certificate_hash": "38b7c1abbfa31cb4d17fc6ea645e154df9a0016e"
+          }
+        },
+        {
+          "client_id": "172142024309-jm2bju79gli9br8d0866c6dhm7viji6p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNZMIGDHaabPGIlZeECaVFzwwRR_QpAhU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "172142024309-jm2bju79gli9br8d0866c6dhm7viji6p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
