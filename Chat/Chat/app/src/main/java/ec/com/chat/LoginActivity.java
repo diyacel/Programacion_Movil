@@ -15,8 +15,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+/**
+ * Login activity class
+ */
 public class LoginActivity extends AppCompatActivity {
 
     MaterialEditText email, password;
@@ -25,6 +29,10 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth auth;
     TextView forgot_password;
 
+    /**
+     * Method that starts the activity
+     * @param savedInstanceState saves the state of the activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +50,14 @@ public class LoginActivity extends AppCompatActivity {
         btn_login = findViewById(R.id.btn_login);
         forgot_password = findViewById(R.id.forgot_password);
 
+        /**
+         * Metodo que cambia
+         */
         forgot_password.setOnClickListener(new View.OnClickListener() {
+            /**
+             * click method that changes the activity to modify the password
+             * @param view contains the activity view
+             */
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
@@ -50,6 +65,10 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         btn_login.setOnClickListener(new View.OnClickListener() {
+            /**
+             * click method to login
+             * @param view contains the activity view
+             */
             @Override
             public void onClick(View view) {
                 String txt_email = email.getText().toString();
@@ -58,7 +77,6 @@ public class LoginActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)){
                     Toast.makeText(LoginActivity.this, "All fileds are required", Toast.LENGTH_SHORT).show();
                 } else {
-
                     auth.signInWithEmailAndPassword(txt_email, txt_password)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override

@@ -23,7 +23,7 @@ import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    MaterialEditText username, email, password;
+    MaterialEditText username, name, lastname, email, password;
     Button btn_register;
 
     FirebaseAuth auth;
@@ -40,6 +40,8 @@ public class RegisterActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         username = findViewById(R.id.username);
+        name = findViewById(R.id.name);
+        lastname = findViewById(R.id.lastname);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         btn_register = findViewById(R.id.btn_register);
@@ -50,6 +52,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String txt_username = username.getText().toString();
+                String txt_name = name.getText().toString();
+                String txt_lastname = lastname.getText().toString();
                 String txt_email = email.getText().toString();
                 String txt_password = password.getText().toString();
 
@@ -58,13 +62,13 @@ public class RegisterActivity extends AppCompatActivity {
                 } else if (txt_password.length() < 6 ){
                     Toast.makeText(RegisterActivity.this, "password must be at least 6 characters", Toast.LENGTH_SHORT).show();
                 } else {
-                    register(txt_username, txt_email, txt_password);
+                    register(txt_username, txt_name, txt_lastname, txt_email, txt_password);
                 }
             }
         });
     }
 
-    private void register(final String username, String email, String password){
+    private void register(final String username,final String name, final String lastname,String email, String password){
 
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -80,9 +84,11 @@ public class RegisterActivity extends AppCompatActivity {
                             HashMap<String, String> hashMap = new HashMap<>();
                             hashMap.put("id", userid);
                             hashMap.put("username", username);
+                            hashMap.put("name", name);
+                            hashMap.put("lastname", lastname);
                             hashMap.put("imageURL", "default");
                             hashMap.put("status", "offline");
-                            hashMap.put("search", username.toLowerCase());
+                            //hashMap.put("search", username.toLowerCase());
 
                             reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

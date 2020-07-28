@@ -36,6 +36,22 @@
         <com.rengwuxian.materialedittext.MaterialEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/name"
+            android:layout_marginTop="10dp"
+            app:met_floatingLabel="normal"
+            android:hint="Name"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lastname"
+            android:layout_marginTop="10dp"
+            app:met_floatingLabel="normal"
+            android:hint="Lastname"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/email"
             android:inputType="textEmailAddress"
             android:layout_marginTop="10dp"
@@ -50,6 +66,7 @@
             android:layout_marginTop="10dp"
             app:met_floatingLabel="normal"
             android:hint="Password"/>
+
 
         <Button
             android:layout_width="match_parent"
