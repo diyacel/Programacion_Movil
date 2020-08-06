@@ -29,6 +29,10 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseAuth auth;
     DatabaseReference reference;
 
+    /**
+     * Método para iniciar la ventana del listado de usuarioa
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +72,14 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Método registra en la base de datos el nuevo usuario
+     * @param username
+     * @param name
+     * @param lastname
+     * @param email
+     * @param password
+     */
     private void register(final String username,final String name, final String lastname,String email, String password){
 
         auth.createUserWithEmailAndPassword(email, password)

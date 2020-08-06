@@ -21,6 +21,10 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
 
+    /**
+     * Método de contrucción de la ventana para cambiar la contraseña
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

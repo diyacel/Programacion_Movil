@@ -39,6 +39,13 @@ public class ChatsFragment extends Fragment {
 
     private List<Chatlist> usersList;
 
+    /**
+     * Método de inicialización de la ventana de chat
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -77,12 +84,19 @@ public class ChatsFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Método de actualización del token
+     * @param token
+     */
     private void updateToken(String token){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Tokens");
         Token token1 = new Token(token);
         reference.child(fuser.getUid()).setValue(token1);
     }
 
+    /**
+     * Método que permite obtener el historial del chat
+     */
     private void chatList() {
         mUsers = new ArrayList<>();
         reference = FirebaseDatabase.getInstance().getReference("Users");

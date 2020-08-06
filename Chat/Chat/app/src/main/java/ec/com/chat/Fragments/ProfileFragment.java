@@ -53,7 +53,13 @@ public class ProfileFragment extends Fragment {
     private Uri imageUri;
     private StorageTask uploadTask;
 
-
+    /**
+     * Método de inicialización de la ventana de perfil de usuario
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -96,6 +102,9 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Método que obtiene la imagen de usuario
+     */
     private void openImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -103,12 +112,20 @@ public class ProfileFragment extends Fragment {
         startActivityForResult(intent, IMAGE_REQUEST);
     }
 
+    /**
+     * Método que obtiene la extension de la imagen
+     * @param uri
+     * @return
+     */
     private String getFileExtension(Uri uri){
         ContentResolver contentResolver = getContext().getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
+    /**
+     * Método que actualiza la imagen del usuario
+     */
     private void uploadImage(){
         final ProgressDialog pd = new ProgressDialog(getContext());
         pd.setMessage("Uploading");
@@ -158,6 +175,12 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    /**
+     * Método que actualiza toda la ventana de actividad del usuario
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

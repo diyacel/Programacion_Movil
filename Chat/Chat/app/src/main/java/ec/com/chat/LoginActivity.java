@@ -20,6 +20,8 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 /**
  * Login activity class
+ *  * @author Enso Vera
+ *  * @author Diego Yacelga
  */
 public class LoginActivity extends AppCompatActivity {
 
@@ -51,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         forgot_password = findViewById(R.id.forgot_password);
 
         /**
-         * Metodo que cambia
+         * Metodo que cambia la pantalla después de haberse logeado correctamente un usuario
          */
         forgot_password.setOnClickListener(new View.OnClickListener() {
             /**

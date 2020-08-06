@@ -89,7 +89,10 @@ public class MessageActivity extends AppCompatActivity {
 
     boolean notify = false;
 
-
+    /**
+     * Método que crea y actualiza el historial de mensajes
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -175,6 +178,10 @@ public class MessageActivity extends AppCompatActivity {
         seenMessage(userid);
     }
 
+    /**
+     * Método permite visualizar si el mensaje fue leído por el receptor
+     * @param userid
+     */
     private void seenMessage(final String userid){
         reference = FirebaseDatabase.getInstance().getReference("Chats");
         seenListener = reference.addValueEventListener(new ValueEventListener() {
@@ -197,6 +204,14 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Método permite enviar el mensaje, con los siguientes parámetros
+     * @param sender
+     * @param receiver
+     * @param message
+     * @param uriPhoto
+     * @param isFhoto
+     */
     private void sendMessage(String sender, final String receiver, String message, String uriPhoto,  boolean isFhoto) {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
@@ -257,6 +272,12 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Método permite enviar una notificación de que llegó un mensaje con los siguientes parámetros
+     * @param receiver
+     * @param username
+     * @param message
+     */
     private void sendNotifiaction(String receiver, final String username, final String message){
         DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Tokens");
         Query query = tokens.orderByKey().equalTo(receiver);
@@ -296,6 +317,12 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Método que actualiza si el mensaje fue leído, con los siguiente parámetros
+     * @param myid
+     * @param userid
+     * @param imageurl
+     */
     private void readMesagges(final String myid, final String userid, final String imageurl){
         mchat = new ArrayList<>();
 
@@ -323,12 +350,20 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Método que registra cual es el usuario actual
+     * @param userid
+     */
     private void currentUser(String userid){
         SharedPreferences.Editor editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit();
         editor.putString("currentuser", userid);
         editor.apply();
     }
 
+    /**
+     * Método que actualiza el estatus del usuario
+     * @param status
+     */
     private void status(String status){
         reference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
 
@@ -338,6 +373,9 @@ public class MessageActivity extends AppCompatActivity {
         reference.updateChildren(hashMap);
     }
 
+    /**
+     * Método que actualiza el estado del usuario en "online"
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -345,6 +383,9 @@ public class MessageActivity extends AppCompatActivity {
         currentUser(userid);
     }
 
+    /**
+     * método que actualiza el estado del usuario en "offline"
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -353,6 +394,9 @@ public class MessageActivity extends AppCompatActivity {
         currentUser("none");
     }
 
+    /**
+     * Método que permite seleccionar una imagen
+     */
     private void openImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -360,6 +404,12 @@ public class MessageActivity extends AppCompatActivity {
         startActivityForResult(intent, IMAGE_REQUEST);
     }
 
+    /**
+     * Método que guarda y asigna la imagen seleccionada para cada usuario
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

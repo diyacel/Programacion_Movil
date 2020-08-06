@@ -37,7 +37,13 @@ public class UsersFragment extends Fragment {
 
     EditText search_users;
 
-
+    /**
+     * Método de inicialización de la ventana lista de usuarios
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,6 +79,10 @@ public class UsersFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Método para buscar un usuario
+     * @param s
+     */
     private void searchUsers(String s) {
 
         final FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
@@ -105,7 +115,9 @@ public class UsersFragment extends Fragment {
         });
 
     }
-
+    /**
+     * Método para leer la información de cada usuario
+     */
     private void readUsers() {
 
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();

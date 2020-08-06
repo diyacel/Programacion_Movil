@@ -15,6 +15,9 @@ public class StartActivity extends AppCompatActivity {
 
     FirebaseUser firebaseUser;
 
+    /**
+     * Método que inicia la conexión con la base de datos
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -29,6 +32,10 @@ public class StartActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Método que iniciar la ventana principal
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

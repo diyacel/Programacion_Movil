@@ -36,6 +36,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Main activity class
+ * @author Enso Vera
+ * @author Diego Yacelga
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -133,6 +135,11 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     *
+     * Metodo recibe de parametro @param item
+     * @return returna el item selecionado
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
@@ -147,6 +154,9 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * Clase que visualiza el adaptador de pagina
+     */
     class ViewPagerAdapter extends FragmentPagerAdapter {
 
         private ArrayList<Fragment> fragments;
@@ -180,6 +190,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *
+     * método que recive el parámetro @param status
+     * actualiza la referencia en el HashMap
+     */
     private void status(String status){
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
@@ -189,12 +204,18 @@ public class MainActivity extends AppCompatActivity {
         reference.updateChildren(hashMap);
     }
 
+    /**
+     * Método actualiza el estado en "online"
+     */
     @Override
     protected void onResume() {
         super.onResume();
         status("online");
     }
 
+    /**
+     * Método actualiza el estado en "offline"
+     */
     @Override
     protected void onPause() {
         super.onPause();

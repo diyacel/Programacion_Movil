@@ -23,46 +23,65 @@ public class Chat {
     public Chat() {
     }
 
+    /**
+     * Métodos getter y setter de quien envia
+     * @return
+     */
     public String getSender() {
         return sender;
     }
-
     public void setSender(String sender) {
         this.sender = sender;
     }
 
+    /**
+     * Métodos getter y setter de quien recibe
+     * @return
+     */
     public String getReceiver() {
         return receiver;
     }
-
     public void setReceiver(String receiver) {
         this.receiver = receiver;
     }
 
+    /**
+     * Métodos getter y setter del mensaje
+     * @return
+     */
     public String getMessage() {
         return message;
     }
-
     public void setMessage(String message) {
         this.message = message;
     }
 
+    /**
+     * Métodos getter y setter de la notificación si fue visto el mensaje
+     * @return
+     */
     public boolean isIsseen() {
         return isseen;
     }
-
     public void setIsseen(boolean isseen) {
         this.isseen = isseen;
     }
 
+    /**
+     * Métodos getter y setter de la foto de perfil
+     * @return
+     */
     public String getUriPhoto() {
         return UriPhoto;
     }
-
     public void setUriPhoto(String uriPhoto) {
         UriPhoto = uriPhoto;
     }
 
+    /**
+     * Métodos getter y setter que comprueban si es foto o no
+     * @return
+     */
     public boolean isPhoto() {
         return isPhoto;
     }

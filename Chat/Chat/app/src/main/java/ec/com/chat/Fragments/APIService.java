@@ -15,7 +15,9 @@ public interface APIService {
                     "Authorization:key=ADD HERE YOUR KEY FROM FIREBASE PROJECT"
             }
     )
-
+    /**
+     * Llama al fragment y le envia la notificación
+     */
     @POST("fcm/send")
     Call<MyResponse> sendNotification(@Body Sender body);
 }

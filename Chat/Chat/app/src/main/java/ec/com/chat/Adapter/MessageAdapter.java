@@ -35,6 +35,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         this.imageurl = imageurl;
     }
 
+    /**
+     * Método que inicializa el adaptador de mensajes
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @Override
     public MessageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -47,6 +53,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         }
     }
 
+    /**
+     * Método que establece cada usuaio con su imagen
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull MessageAdapter.ViewHolder holder, int position) {
 
@@ -82,11 +93,18 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     }
 
+    /**
+     * Método que returna el item seleccionado
+     * @return
+     */
     @Override
     public int getItemCount() {
         return mChat.size();
     }
 
+    /**
+     * Clase que permite actualizar toda la activiada que realiza el usuario
+     */
     public  class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView show_message;
@@ -104,6 +122,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         }
     }
 
+    /**
+     * Método que permite obtener el tipo de imtem
+     * @param position
+     * @return
+     */
     @Override
     public int getItemViewType(int position) {
         fuser = FirebaseAuth.getInstance().getCurrentUser();
