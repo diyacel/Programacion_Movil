@@ -1,7 +1,10 @@
 package ec.com.chat;
 
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -9,12 +12,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +32,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
+
 import ec.com.chat.Adapter.MessageAdapter;
 import ec.com.chat.Fragments.APIService;
 import ec.com.chat.Model.Chat;
@@ -49,8 +63,11 @@ public class MessageActivity extends AppCompatActivity {
 
     FirebaseUser fuser;
     DatabaseReference reference;
+    FirebaseStorage storage;
+    StorageReference storageReference;
 
     ImageButton btn_send;
+    ImageButton btn_send_photo;
     EditText text_send;
 
     MessageAdapter messageAdapter;
@@ -64,9 +81,14 @@ public class MessageActivity extends AppCompatActivity {
 
     String userid;
 
+    private static final int IMAGE_REQUEST = 1;
+
     APIService apiService;
 
+    StorageTask uploadTask;
+
     boolean notify = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +109,9 @@ public class MessageActivity extends AppCompatActivity {
 
         apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
 
+        storage = FirebaseStorage.getInstance();
+        //storageReference = FirebaseStorage.getInstance().getReference("uploads");
+
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -96,6 +121,7 @@ public class MessageActivity extends AppCompatActivity {
         profile_image = findViewById(R.id.profile_image);
         username = findViewById(R.id.username);
         btn_send = findViewById(R.id.btn_send);
+        btn_send_photo = findViewById(R.id.btn_send_photo);
         text_send = findViewById(R.id.text_send);
 
         intent = getIntent();
@@ -108,7 +134,7 @@ public class MessageActivity extends AppCompatActivity {
                 notify = true;
                 String msg = text_send.getText().toString();
                 if (!msg.equals("")){
-                    sendMessage(fuser.getUid(), userid, msg);
+                    sendMessage(fuser.getUid(), userid, msg, "default", false);
                 } else {
                     Toast.makeText(MessageActivity.this, "You can't send empty message", Toast.LENGTH_SHORT).show();
                 }
@@ -116,6 +142,12 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
+        btn_send_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openImage();
+            }
+        });
 
         reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
 
@@ -165,15 +197,18 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
 
-    private void sendMessage(String sender, final String receiver, String message){
+    private void sendMessage(String sender, final String receiver, String message, String uriPhoto,  boolean isFhoto) {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
         HashMap<String, Object> hashMap = new HashMap<>();
+
         hashMap.put("sender", sender);
         hashMap.put("receiver", receiver);
         hashMap.put("message", message);
         hashMap.put("isseen", false);
+        hashMap.put("UriPhoto", uriPhoto);
+        hashMap.put("isPhoto", isFhoto);
 
         reference.child("Chats").push().setValue(hashMap);
 
@@ -183,7 +218,7 @@ public class MessageActivity extends AppCompatActivity {
                 .child(fuser.getUid())
                 .child(userid);
 
-        chatRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            chatRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()){
@@ -317,4 +352,44 @@ public class MessageActivity extends AppCompatActivity {
         status("offline");
         currentUser("none");
     }
+
+    private void openImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, IMAGE_REQUEST);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == IMAGE_REQUEST && resultCode == RESULT_OK){
+            Uri u = data.getData();
+
+            storageReference =  storage.getReference("imagen_chat");
+            final StorageReference photoReference = storageReference.child(u.getLastPathSegment());
+
+            photoReference.putFile(u).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()){
+                        throw  task.getException();
+                    }
+
+                    return  photoReference.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    Uri downloadUri = task.getResult();
+                    String mUri = downloadUri.toString();
+
+                    sendMessage(fuser.getUid(), userid, "", mUri, true);
+                }
+            });
+        }
+    }
+
+
 }

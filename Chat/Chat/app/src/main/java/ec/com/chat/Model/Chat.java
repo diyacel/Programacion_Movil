@@ -1,17 +1,23 @@
 package ec.com.chat.Model;
 
+import android.widget.ImageView;
+
 public class Chat {
 
     private String sender;
     private String receiver;
     private String message;
     private boolean isseen;
+    private String UriPhoto;
+    private boolean isPhoto;
 
-    public Chat(String sender, String receiver, String message, boolean isseen) {
+    public Chat(String sender, String receiver, String message, boolean isseen, String UriPhoto, boolean isPhoto) {
         this.sender = sender;
         this.receiver = receiver;
         this.message = message;
         this.isseen = isseen;
+        this.UriPhoto = UriPhoto;
+        this.isPhoto = isPhoto;
     }
 
     public Chat() {
@@ -47,5 +53,21 @@ public class Chat {
 
     public void setIsseen(boolean isseen) {
         this.isseen = isseen;
+    }
+
+    public String getUriPhoto() {
+        return UriPhoto;
+    }
+
+    public void setUriPhoto(String uriPhoto) {
+        UriPhoto = uriPhoto;
+    }
+
+    public boolean isPhoto() {
+        return isPhoto;
+    }
+
+    public void setPhoto(boolean photo) {
+        isPhoto = photo;
     }
 }

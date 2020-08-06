@@ -21,19 +21,19 @@
             app:popupTheme="@style/MenuStyle">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
                 android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:id="@+id/profile_image"/>
+                android:layout_height="30dp" />
 
             <TextView
+                android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/username"
-                android:textSize="18sp"
+                android:layout_marginStart="25dp"
                 android:layout_marginLeft="25dp"
                 android:textColor="#fff"
-                android:textStyle="bold"
-                android:layout_marginStart="25dp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
         </android.support.v7.widget.Toolbar>
 
@@ -54,14 +54,21 @@
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/text_send"
-            android:background="@android:color/transparent"
-            android:hint="Type a message..."
+        <ImageButton
+            android:id="@+id/btn_send_photo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_toLeftOf="@id/btn_send"
-            android:layout_centerVertical="true"/>
+            android:background="@android:drawable/ic_menu_gallery" />
+
+        <EditText
+            android:id="@+id/text_send"
+            android:layout_width="415dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/btn_send_photo"
+            android:background="@android:color/transparent"
+            android:hint="Type a message..." />
 
         <ImageButton
             android:layout_width="40dp"

@@ -3,6 +3,7 @@ package ec.com.chat.Adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,16 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         holder.show_message.setText(chat.getMessage());
 
+        Log.v("uriPhoto:" , chat.getUriPhoto());
+
+        if (chat.getUriPhoto().equals("default")){
+            holder.messagePhoto.setVisibility(View.GONE);
+        } else {
+            Glide.with(mContext).load(chat.getUriPhoto()).into(holder.messagePhoto);
+            holder.messagePhoto.setVisibility(View.VISIBLE);
+            holder.show_message.setVisibility(View.GONE);
+        }
+
         if (imageurl.equals("default")){
             holder.profile_image.setImageResource(R.mipmap.ic_launcher);
         } else {
@@ -81,6 +92,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         public TextView show_message;
         public ImageView profile_image;
         public TextView txt_seen;
+        public ImageView messagePhoto;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -88,6 +100,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             show_message = itemView.findViewById(R.id.show_message);
             profile_image = itemView.findViewById(R.id.profile_image);
             txt_seen = itemView.findViewById(R.id.txt_seen);
+            messagePhoto = itemView.findViewById(R.id.messagePhoto);
         }
     }
 
